@@ -91,12 +91,14 @@ section{padding:64px 0}
 .brand svg{width:38px;height:38px;flex:none}
 .brand-name{display:flex;flex-direction:column}
 .brand b{font:400 21px/1 var(--display);letter-spacing:.01em}
+.brand i{font-style:normal}
 .brand span span{font:600 11px/1 var(--text);letter-spacing:.08em;white-space:nowrap;text-transform:uppercase;color:var(--soft);margin-top:5px}
 .tel{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 2px;font:400 17px/1 var(--display);text-decoration:none;white-space:nowrap}
 .tel svg{width:18px;height:18px;flex:none;color:var(--copper-ink)}
 /* phones: the wordmark and the number must both fit on one row down to 360px */
-@media (max-width:440px){.brand{gap:8px}.brand svg{width:34px;height:34px}.brand b{font-size:20px}.brand span span{font-size:10px;letter-spacing:.06em}.tel svg{display:none}}
-@media (max-width:374px){.brand svg{width:30px;height:30px}.brand b{font-size:18px}.brand span span{font-size:10px;letter-spacing:.04em}.tel{font-size:16px}}
+/* phones: the header's descriptor drops to "Pourworks" (the hero eyebrow says epoxy right below) so wordmark and number fit one row */
+@media (max-width:440px){.brand{gap:8px}.brand svg{width:34px;height:34px}.brand .wide{display:none}.brand span span{letter-spacing:.12em}}
+@media (max-width:374px){.brand svg{width:32px;height:32px}.brand b{font-size:19px}.tel{font-size:16px}.tel svg{display:none}}
 
 /* ---------- Hero: a metallic epoxy floor under navy ---------- */
 .hero{padding:0;position:relative;background:var(--deep);color:var(--on-dark);overflow:hidden;isolation:isolate}
@@ -259,7 +261,7 @@ FORM: calm band system (lpmr.co.uk via DPG) with a photo-style hero; finish card
 </svg>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#" aria-label="Gorbachev Pourworks, epoxy flooring, back to top"><svg aria-hidden="true"><use href="#i-mark"/></svg><span class="brand-name"><b>Gorbachev</b><span>Pourworks · Epoxy Floors</span></span></a>
+    <a class="brand" href="#" aria-label="Gorbachev Pourworks, epoxy flooring, back to top"><svg aria-hidden="true"><use href="#i-mark"/></svg><span class="brand-name"><b>Gorbachev</b><span>Pourworks<i class="wide"> · Epoxy Floors</i></span></span></a>
     <a class="tel" href="tel:+15550100000"><svg aria-hidden="true"><use href="#i-phone"/></svg>(555) 010-0000</a>
   </div>
 </header>
