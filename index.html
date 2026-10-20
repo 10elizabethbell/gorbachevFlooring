@@ -83,7 +83,6 @@ section{padding:64px 0}
 .btn:active{transform:scale(.98)}
 .btn svg{width:20px;height:20px;flex:none}
 .btn-primary{background:var(--copper);color:var(--ink);border-color:var(--copper)}
-.btn-ghost{background:transparent;color:var(--on-dark);border-color:rgba(244,247,251,.7)}
 
 /* ---------- Header ---------- */
 .top{background:var(--paper);color:var(--ink)}
@@ -241,7 +240,6 @@ footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--on-d
 @media (hover:hover){
 .tel:hover{color:var(--copper-ink)}
 .btn-primary:hover{background:var(--copper-2);border-color:var(--copper-2)}
-.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.1)}
 .row:hover .arrow,.finish:hover .arrow{background:var(--copper);color:var(--ink)}
 input[type=text]:hover,textarea:hover{border-color:var(--focus)}
 .chips label:hover{border-color:var(--focus)}
@@ -264,7 +262,7 @@ footer a:hover{color:var(--copper)}
 THESIS: An epoxy crew that wins trust by caring about the part nobody sees: the prep. One claim (your garage, finished like glass), three finishes to pick from, and an easy way to text a photo for a quote.
 OWN-WORLD: Off-white paper, logo-tile navy (#12304f) and deep navy (#0b1d31, faint diagonal lines) bands, copper from metallic epoxy veins as the one warm accent (fills only; #9a4a12 when it has to be text on light). Cal Sans display, system body at 16/1.7. Images are procedural renders of epoxy floors (tools/render-floors.html), never stock photos of other crews' jobs.
 STORY: The visitor sees a floor that shines, believes this crew will treat their garage carefully, picks a finish, and texts a photo for a free quote.
-FIRST VIEWPORT: Paper header with the dripping-G mark and wordmark left, tap-to-call number top right. Hero on a navy-washed metallic floor: eyebrow, "Your garage, finished like glass.", one promise line, two pill buttons (Get a free quote, Text us a photo).
+FIRST VIEWPORT: Paper header with the dripping-G mark and wordmark left, tap-to-call number top right. Hero on a navy-washed metallic floor: eyebrow, "Your garage, finished like glass.", one promise line, one pill button (Get a free quote); texting lives in the floating circle below the hero.
 FORM: house default calm-photo-style (Ellie 2026-10-19), no concept roll; photo-style hero from a generated render (phone gets its own portrait render with the lit floor below the buttons); finish cards in the kit's work-card shape.
 -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -294,7 +292,6 @@ FORM: house default calm-photo-style (Ellie 2026-10-19), no concept roll; photo-
     <p class="promise"><b>We take our time on the prep</b>, so the shine lasts for years.</p>
     <div class="actions">
       <a class="btn btn-primary" href="#quote">Get a free quote</a>
-      <a class="btn btn-ghost" data-sms href="sms:+17326446757?&amp;body=Hi%20Gorbachev%20Pourworks%2C%20I%20found%20your%20website.%20Here%27s%20a%20photo%20of%20my%20floor%3A%20"><svg aria-hidden="true"><use href="#i-chat"/></svg>Text us a photo</a>
     </div>
   </div>
 </section>
