@@ -6,7 +6,7 @@
 - **Brand:** "Gorbachev Pourworks", always paired with "Epoxy Floors / Epoxy flooring". Logo: a copper **G that drips**, on a rounded navy tile (`favicon.svg`, `#i-mark` symbol in the page, `apple-touch-icon.png`). On phones the header shows "Gorbachev / POURWORKS" (the hero eyebrow says "Epoxy floor coatings" right below); from 441px up it reads "POURWORKS · EPOXY FLOORS".
 - **Palette on the calm style:** paper `#f4f6fb`, navy `#12304f` (the logo tile), deep navy `#0b1d31` with the faint line texture, **copper `#e39a5f`** as the one accent (taken from metallic-epoxy veins), `#9a4a12` when copper has to be text on light. Form outlines are blue `#1f5fa8` so they stand out from the copper fill.
 - **Sections:** header (mark + wordmark, number top right) → hero (generated metallic floor under navy; phones get their own portrait render with the lit floor showing under the buttons; eyebrow, "Your garage, finished like glass.", promise, Get a free quote + Text us a photo) → "From bare concrete to a floor you'll show off." service rows on navy (5 rows, each pre-selects the form's chip, with one copper pulse to show it) → "Pick your finish." Flake / Metallic / Solid colour cards (each pre-selects the finish) → "We treat your garage like it's ours." care list → How it works (3 steps) → quote form → closing band with the big number → footer (name line + email only; the number lives once in the closing band).
-- **Contact wiring:** the form composes a text message (floor, finish, name, town, size, notes, "I'll attach a photo") to `CONFIG.SMS`; if no messages app opens, the message appears with **Copy message** and **Open in Messages**; the floating text circle shows after the hero and hides at the form. Everything points at placeholders (below).
+- **Contact wiring:** the form composes a text message (floor, finish, name, town, size, notes, "I'll attach a photo") to `CONFIG.SMS`; if no messages app opens, the message appears with **Copy message** and **Open in Messages**; the floating text circle shows after the hero and hides at the form. Texts and calls go to (732) 644-6757.
 - **Motion:** hero H1 bounce-in, `.rise` fade-up and the floating circle all work. Under reduced motion and with no JS, everything shows at once (checked).
 - **Link preview:** `og.jpg` (1200x630) with the logo, the name and the headline.
 
@@ -44,7 +44,6 @@ Every image on the site is a procedural render I made for it in `tools/render-fl
 - **Colours:** there was no client brand, so the palette comes from the material (copper metallic epoxy) and the calm-style navies.
 
 ## Placeholders and gaps
-- **Phone:** `(555) 010-0000` / `+15550100000` (a fictional range). It appears in the header `tel:`, the hero `sms:`, the float `sms:`, `CONFIG.SMS`, the form's fallback line, the closing band and the footer. Search for `5550100000` and `010-0000`.
 - **Email:** `hello@example.com` (footer only).
 - **Facebook / Instagram:** none exists, so there's no "see more of our work" link under the finishes and none in the footer. Add both once there's a page.
 - **Service area, hours, years, licence/insurance, prices, reviews:** unknown, and none are stated anywhere. The closing band says "Tell us your town and we'll tell you straight away if we cover it."
@@ -52,7 +51,7 @@ Every image on the site is a procedural render I made for it in `tools/render-fl
 
 ## Questions for the owner
 1. Which name do you like, and is it OK to use it on a public site?
-2. What phone number takes texts? What email? Any Facebook page?
+2. Does (732) 644-6757 take texts? What email? Any Facebook page?
 3. Which towns do you cover?
 4. Which systems do you lay: flake, metallic, solid, quartz, polyaspartic? Which do you push?
 5. Do you diamond-grind every floor? What do you do about cracks and moisture?

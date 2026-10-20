@@ -18,10 +18,10 @@ A careful, prep-first epoxy crew: the floor looks like poured glass because the 
 ## Capabilities
 - Floor systems commonly offered by epoxy contractors: flake, metallic, solid colour (from the brief's category note; the client has not confirmed which they offer).
 - Rooms: garages, basements, workshops, commercial floors; crack and chip repair (inferred).
-- Contact: text message and phone. Both are placeholders until the client gives real ones.
+- Contact: text message and phone, both to (732) 644-6757 (set 2026-10-20). Email is still a placeholder.
 
 ## Constraints
-- No real contact details, area, hours, years, licence, prices or reviews. Never state any of those as fact.
+- No real email, area, hours, years, licence, prices or reviews. Never state any of those as fact.
 - No client photos. Every image on the page is generated for this site (procedural renders), not a photo of a real job.
 - No Facebook or other social links exist yet.
 
