@@ -1,0 +1,142 @@
+<!doctype html>
+<meta charset="utf-8">
+<!--
+Procedural epoxy-floor renders for the Gorbachev Pourworks site. Every image on the
+site comes from this file (no stock photos). Render one with headless Chrome:
+  tools/render.sh   (renders every mode into src-assets/gen/)
+Hash: #mode,width,height. Modes: hero, metallic, flake, solid.
+Each finish is drawn as a flat texture, then laid onto a floor in perspective with
+mipmapped sampling, a gloss reflection of ceiling light strips, and a dark back wall.
+-->
+<style>html,body{margin:0;background:#0b1828;overflow:hidden}canvas{display:block}</style>
+<canvas id="c"></canvas>
+<script>
+var HP=(location.hash||'#hero,1920,1080').slice(1).split(',');
+var MODE=HP[0],W=+HP[1]||innerWidth,H=+HP[2]||innerHeight;
+var cv=document.getElementById('c');cv.width=W;cv.height=H;
+var ctx=cv.getContext('2d');
+
+/* ---- seeded random + value noise ---- */
+var seed=MODE.length*977+13;
+function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646}
+var P=new Uint8Array(512);(function(){var p=[];for(var i=0;i<256;i++)p[i]=i;for(i=255;i>0;i--){var j=Math.floor(rnd()*(i+1)),t=p[i];p[i]=p[j];p[j]=t}for(i=0;i<512;i++)P[i]=p[i&255]})();
+function fade(t){return t*t*t*(t*(t*6-15)+10)}
+function grad(h,x,y){var a=h&7;var u=a<4?x:y,v=a<4?y:x;return((a&1)?-u:u)+((a&2)?-2*v:2*v)}
+// periodic gradient noise: repeats every `per` units, so the finished texture tiles without seams
+function noise(x,y,per){per=per||256;var X=Math.floor(x),Y=Math.floor(y);x-=X;y-=Y;X=((X%per)+per)%per;Y=((Y%per)+per)%per;var X1=(X+1)%per,Y1=(Y+1)%per;var u=fade(x),v=fade(y);
+  function h(i,j){return P[P[i&255]+(j&255)]}
+  var n=(1-v)*((1-u)*grad(h(X,Y),x,y)+u*grad(h(X1,Y),x-1,y))+v*((1-u)*grad(h(X,Y1),x,y-1)+u*grad(h(X1,Y1),x-1,y-1));
+  return n*0.35}
+var PER=3;
+function fbm(x,y,o){var s=0,a=.5,f=1;for(var i=0;i<(o||5);i++){s+=a*noise(x*f,y*f,PER*f);f*=2;a*=.5}return s}
+function mix(a,b,t){return a+(b-a)*t}
+function ramp(stops,t){t=Math.max(0,Math.min(1,t));for(var i=1;i<stops.length;i++){if(t<=stops[i][0]){var s=stops[i-1],e=stops[i],k=(t-s[0])/(e[0]-s[0]);return[mix(s[1][0],e[1][0],k),mix(s[1][1],e[1][1],k),mix(s[1][2],e[1][2],k)]}}return stops[stops.length-1][1]}
+function hex(h){return[parseInt(h.substr(1,2),16),parseInt(h.substr(3,2),16),parseInt(h.substr(5,2),16)]}
+
+/* ---- flat textures (T x T, tiling not required: the floor never repeats in view) ---- */
+var T=1024;
+function metallicTex(pal,scale){PER=scale;
+  var d=new Float32Array(T*T*3);
+  for(var y=0;y<T;y++)for(var x=0;x<T;x++){
+    var px=x/T*scale,py=y/T*scale;
+    var qx=fbm(px,py,3),qy=fbm(px+5.2,py+1.3,3);
+    var rx=fbm(px+3*qx+1.7,py+3*qy+9.2,4),ry=fbm(px+3*qx+8.3,py+3*qy+2.8,4);
+    var v=fbm(px+3*rx,py+3*ry,6);
+    var c=ramp(pal,.5+v*1.6);
+    // metallic lacing: bright where the warp folds over itself
+    var lace=Math.pow(Math.max(0,1-Math.abs(rx-ry)*9),6);
+    var vein=Math.pow(Math.max(0,1-Math.abs(qx*2.2+qy)*7),5);
+    var i=(y*T+x)*3;
+    d[i]=c[0]+lace*90+vein*pal.vein[0];d[i+1]=c[1]+lace*92+vein*pal.vein[1];d[i+2]=c[2]+lace*96+vein*pal.vein[2];
+  }
+  return d}
+function flakeTex(){
+  var c=document.createElement('canvas');c.width=c.height=T;var g=c.getContext('2d');
+  g.fillStyle='#55585c';g.fillRect(0,0,T,T);
+  var cols=['#1d1f22','#2b2e33','#3b3f45','#6b6f75','#8e9399','#b9bcc0','#e4e2dc','#f3f1ec','#7a6f62','#a39581'];
+  var w=[3,3,3,2,2,2,2,1.5,1,1];
+  var tot=w.reduce(function(a,b){return a+b});
+  for(var n=0;n<52000;n++){
+    var r=rnd()*tot,k=0;while(r>w[k]){r-=w[k];k++}
+    var x=rnd()*T,y=rnd()*T,s=2+rnd()*rnd()*7,a=rnd()*6.28;
+    g.fillStyle=cols[k];g.beginPath();
+    var m=3+Math.floor(rnd()*3);
+    for(var j=0;j<m;j++){var aa=a+j/m*6.28+rnd()*.8,rr=s*(.5+rnd()*.7);g[j?'lineTo':'moveTo'](x+Math.cos(aa)*rr,y+Math.sin(aa)*rr)}
+    g.closePath();g.fill();
+  }
+  var id=g.getImageData(0,0,T,T).data,d=new Float32Array(T*T*3);
+  for(var i=0,o=0;i<id.length;i+=4,o+=3){d[o]=id[i];d[o+1]=id[i+1];d[o+2]=id[i+2]}
+  return d}
+function solidTex(col){
+  var d=new Float32Array(T*T*3),b=hex(col);
+  for(var y=0;y<T;y++)for(var x=0;x<T;x++){var n=fbm(x/T*PER,y/T*PER,4)*14,i=(y*T+x)*3;d[i]=b[0]+n;d[i+1]=b[1]+n;d[i+2]=b[2]+n}
+  return d}
+
+/* ---- mip chain ---- */
+function mips(d){var L=[{s:T,d:d}],s=T;
+  while(s>8){var n=s/2,src=L[L.length-1].d,o=new Float32Array(n*n*3);
+    for(var y=0;y<n;y++)for(var x=0;x<n;x++)for(var c=0;c<3;c++){
+      o[(y*n+x)*3+c]=(src[((2*y)*s+2*x)*3+c]+src[((2*y)*s+2*x+1)*3+c]+src[((2*y+1)*s+2*x)*3+c]+src[((2*y+1)*s+2*x+1)*3+c])/4}
+    L.push({s:n,d:o});s=n}
+  return L}
+function sample(L,u,v,lod,out){
+  var l=Math.max(0,Math.min(L.length-1,Math.floor(lod))),m=L[l],s=m.s;
+  var x=((u%1)+1)%1*s-.5,y=((v%1)+1)%1*s-.5,x0=Math.floor(x),y0=Math.floor(y),fx=x-x0,fy=y-y0;
+  function at(xx,yy,c){xx=(xx+s)%s;yy=(yy+s)%s;return m.d[(yy*s+xx)*3+c]}
+  for(var c=0;c<3;c++)out[c]=mix(mix(at(x0,y0,c),at(x0+1,y0,c),fx),mix(at(x0,y0+1,c),at(x0+1,y0+1,c),fx),fy)}
+
+/* ---- the floor in perspective ---- */
+function floor(L,o){
+  var img=ctx.createImageData(W,H),D=img.data;
+  var hz=H*o.horizon,cx=W*(o.cx||.5),f=W*(o.focal||.9),camH=o.camH||1.4,tile=o.tile||3.2;
+  var wall=hex(o.wall),wall2=hex(o.wall2),out=[0,0,0],mean=[0,0,0];
+  sample(L,0,0,L.length-1,mean);
+  var lights=o.lights||[-1.6,1.6];
+  for(var y=0;y<H;y++){
+    var dy=y-hz;
+    for(var x=0;x<W;x++){
+      var r,g,b,i=(y*W+x)*4;
+      if(dy<=1){ // back wall
+        var t=y/hz;r=mix(wall2[0],wall[0],t);g=mix(wall2[1],wall[1],t);b=mix(wall2[2],wall[2],t);
+        if(dy>-H*.012){r*=.55;g*=.55;b*=.55} // shadow line at the skirting
+      }else{
+        var z=camH*f/dy,xw=(x-cx)*z/f;
+        var lod=Math.log2(Math.max(1,z/f*T/tile*1.15));
+        sample(L,xw/tile+.37,z/tile,lod,out);
+        var fog=Math.min(1,Math.max(0,(z-6)/30));
+        r=mix(out[0],mean[0],fog);g=mix(out[1],mean[1],fog);b=mix(out[2],mean[2],fog);
+        // gloss: the wall reflected near the horizon (fresnel), light strips reflected along the floor
+        var fr=Math.pow(Math.min(1,z/22),1.4)*(o.fresnel||.55);
+        r=mix(r,wall[0]*.8,fr);g=mix(g,wall[1]*.8,fr);b=mix(b,wall[2]*.8,fr);
+        // a window reflected in the clear coat: one soft bright panel, edges rippled by orange peel and softer with distance
+        var peel=noise(xw*5,z*5)*.08,sp=0,G=o.glare||[-.6,.6,2,5],soft=.06+z*.03;
+        function ss(e0,e1,t){t=Math.max(0,Math.min(1,(t-e0)/(e1-e0)));return t*t*(3-2*t)}
+        var gx=ss(G[0]-soft,G[0]+soft,xw+peel)*(1-ss(G[1]-soft,G[1]+soft,xw+peel));
+        var gz=ss(G[2]-soft,G[2]+soft,z+peel)*(1-ss(G[3]-soft,G[3]+soft,z+peel));
+        // window mullions: the panel is split into panes
+        var mull=1-.8*Math.exp(-Math.pow(((xw+peel*.25-(G[0]+G[1])/2))/(.015+z*.003),2));
+        sp=gx*gz*mull*(.55+.45*Math.min(1,z/G[3]));
+        sp=Math.min(1.1,sp*(o.gloss||1));
+        // a painted safety line (solid-colour shop floors), under the clear coat so the glare crosses it
+        if(o.stripe){var sl=ss(o.stripe[0]-.004*z,o.stripe[0]+.004*z,xw)*(1-ss(o.stripe[1]-.004*z,o.stripe[1]+.004*z,xw)),sc=hex(o.stripeCol),sk=sl*(1-fog);r=mix(r,sc[0],sk);g=mix(g,sc[1],sk);b=mix(b,sc[2],sk)}
+        r+=sp*235;g+=sp*238;b+=sp*245;
+        var vg=1-.35*Math.pow(Math.abs(x-cx)/W*1.6,2);r*=vg;g*=vg;b*=vg;
+      }
+      D[i]=r;D[i+1]=g;D[i+2]=b;D[i+3]=255;
+    }
+  }
+  ctx.putImageData(img,0,0);
+  // ceiling light glow on the wall, so the reflections have a source
+  if(o.glow){var gr=ctx.createRadialGradient(cx,0,0,cx,0,W*.6);gr.addColorStop(0,'rgba(220,230,245,.18)');gr.addColorStop(1,'rgba(220,230,245,0)');ctx.fillStyle=gr;ctx.fillRect(0,0,W,hz)}
+}
+
+var navyCopper=[[0,hex('#06101d')],[.3,hex('#0e2238')],[.48,hex('#1c3a5c')],[.6,hex('#3c5f84')],[.7,hex('#8a9bb0')],[.78,hex('#c07a45')],[.9,hex('#e6a56d')],[1,hex('#f6dcc0')]];navyCopper.vein=[140,70,20];
+var charCopper=[[0,hex('#141312')],[.35,hex('#2a2622')],[.5,hex('#4a3a2c')],[.62,hex('#8c5a32')],[.74,hex('#c9864d')],[.86,hex('#e9c198')],[1,hex('#fff2e2')]];charCopper.vein=[120,90,60];
+
+// horizon above the frame: the camera looks down at the floor at an angle, so it reads as a surface, not a road
+if(MODE==='hero')floor(mips(metallicTex(navyCopper,2)),{horizon:-.35,cx:.5,wall:'#1a2a3c',wall2:'#1a2a3c',glare:[.3,1.9,2.6,6.5],tile:6,focal:.9,gloss:.75,fresnel:.45});
+if(MODE==='metallic')floor(mips(metallicTex(charCopper,2)),{horizon:-.3,wall:'#3a3430',wall2:'#3a3430',glare:[-.2,.75,2.4,5.2],tile:3.6,focal:1.1,gloss:.8,fresnel:.4});
+if(MODE==='flake')floor(mips(flakeTex()),{horizon:-.3,wall:'#4a4e55',wall2:'#4a4e55',glare:[-.2,.75,2.4,5.2],tile:1.1,focal:1.1,gloss:.6,fresnel:.35});
+if(MODE==='solid')floor(mips(solidTex('#7d858f')),{horizon:-.3,wall:'#3c4552',wall2:'#3c4552',glare:[-.2,.75,2.4,5.2],tile:3,focal:1.1,gloss:.8,fresnel:.5,stripe:[-1.05,-.95],stripeCol:'#d9a038'});
+document.title='done';
+</script>

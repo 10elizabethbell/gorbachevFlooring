@@ -1,0 +1,22 @@
+<!doctype html><meta charset="utf-8">
+<!-- Link-preview card (og.png, 1200x630) and the home-screen icon. Rendered by tools/render.sh. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap">
+<style>
+html,body{margin:0}
+.og{position:relative;width:1200px;height:630px;overflow:hidden;background:#0b1d31;font-family:"Cal Sans",system-ui,sans-serif;color:#fff}
+.og img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%}
+.og::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,29,49,.9),rgba(11,29,49,.66) 60%,rgba(11,29,49,.4))}
+.in{position:absolute;z-index:1;left:72px;top:72px;right:72px;bottom:72px;display:flex;flex-direction:column;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:20px;font-size:40px}
+.brand img{width:76px;height:76px}
+.brand small{display:block;font:600 16px/1 -apple-system,"Helvetica Neue",Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#c6d3e3;margin-top:8px}
+h1{margin:0;font-weight:400;font-size:84px;line-height:1.02;max-width:12ch}
+h1 span{color:#e39a5f}
+.icon{width:180px;height:180px;background:#12304f}
+.icon img{width:180px;height:180px}
+</style>
+<body>
+<div class="og" id="og"><img class="bg" src="../img/hero-1600.webp" alt="">
+  <div class="in"><div class="brand"><img src="../favicon.svg" alt=""><div>Gorbachev Pourworks<small>Epoxy flooring</small></div></div>
+  <h1>Your garage, <span>finished like glass.</span></h1></div></div>
+</body>

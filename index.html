@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gorbachev Pourworks · Epoxy floors for garages, basements and shops</title>
+<meta name="description" content="Gorbachev Pourworks lays flake, metallic and solid-colour epoxy floors in garages, basements, workshops and shops. Text us a photo for a free quote.">
+<meta name="theme-color" content="#f4f6fb">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gorbachev Pourworks · Your garage, finished like glass.">
+<meta property="og:description" content="Epoxy floors for garages, basements and shops. Text us a photo for a free quote.">
+<meta property="og:url" content="https://10elizabethbell.github.io/gorbachevFlooring/">
+<meta property="og:image" content="https://10elizabethbell.github.io/gorbachevFlooring/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" as="image" href="img/hero-900.webp" imagesrcset="img/hero-900.webp 900w, img/hero-1600.webp 1600w" imagesizes="100vw">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap">
+<style>
+/* ---------- Tokens ---------- */
+:root{
+  /* off-white paper, two navies from the logo tile, one copper from metallic epoxy */
+  --paper:#f4f6fb;       /* page ground */
+  --card:#ffffff;
+  --field:#e6ecf5;       /* inputs and chips on the white form card */
+  --ink:#0f2138;         /* headings, text on copper */
+  --body:#2a3a4c;        /* running text on light */
+  --soft:#4a5868;        /* secondary text on light */
+  --navy:#12304f;        /* logo tile: services, close */
+  --deep:#0b1d31;        /* how it works, footer (line texture) */
+  --on-dark:#f4f7fb;
+  --on-dark-soft:#c6d3e3;
+  --copper:#e39a5f;      /* fills only; text on it is --ink */
+  --copper-2:#eeb07c;
+  --copper-ink:#9a4a12;  /* copper as text on light */
+  --line:rgba(15,33,56,.12);
+  --focus:#1f5fa8;       /* form hover/focus outline, distinct from the copper fill */
+  --error:#b3261e;
+  --texture:repeating-linear-gradient(135deg,transparent 0 22px,rgba(255,255,255,.035) 22px 23px);
+  --display:"Cal Sans","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --text:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --r-card:24px;--r-field:10px;--pill:999px;
+  --gutter:20px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;background:var(--paper)}
+body{margin:0;font:16px/1.7 var(--text);color:var(--body);background:var(--paper)}
+::selection{background:var(--copper);color:var(--ink)}
+img,svg{display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+.on-navy :focus-visible,.on-deep :focus-visible,.hero :focus-visible,footer :focus-visible{outline-color:var(--copper)}
+.wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 var(--gutter)}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:400;line-height:1.08;letter-spacing:-.005em;color:var(--ink);text-wrap:balance}
+h2{font-size:clamp(30px,7.6vw,48px)}
+p{margin:0}
+
+/* ---------- Bands ---------- */
+section{padding:64px 0}
+.on-paper{background:var(--paper)}
+.on-navy{background:var(--navy);color:var(--on-dark-soft)}
+.on-deep{background-color:var(--deep);background-image:var(--texture);color:var(--on-dark-soft)}
+.on-navy h2,.on-deep h2,.on-navy h3,.on-deep h3{color:var(--on-dark)}
+.accent{color:var(--copper-ink)}
+.on-navy .accent,.on-deep .accent,.hero .accent{color:var(--copper)}
+.head{display:grid;gap:16px;justify-items:start;max-width:640px}
+.lede{font-size:clamp(17px,4.6vw,19px);color:var(--soft);max-width:38ch}
+.on-navy .lede,.on-deep .lede{color:var(--on-dark-soft)}
+
+/* Eyebrow: a few key headings only. A label, not a button. */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:500 14px/1 var(--text);letter-spacing:.02em;color:var(--ink);background:rgba(15,33,56,.06);padding:9px 14px;border-radius:var(--pill)}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--copper)}
+.hero .eyebrow,.on-navy .eyebrow,.on-deep .eyebrow{color:var(--on-dark);background:rgba(255,255,255,.12)}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 26px;border-radius:var(--pill);font:400 18px/1 var(--display);text-decoration:none;cursor:pointer;border:2px solid transparent;transition:background-color .2s,color .2s,border-color .2s,transform .12s}
+.btn:active{transform:scale(.98)}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-primary{background:var(--copper);color:var(--ink);border-color:var(--copper)}
+.btn-ghost{background:transparent;color:var(--on-dark);border-color:rgba(244,247,251,.7)}
+
+/* ---------- Header ---------- */
+.top{background:var(--paper);color:var(--ink)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding-top:max(8px,env(safe-area-inset-top))}
+.brand{display:flex;align-items:center;gap:10px;min-height:44px;text-decoration:none;line-height:1}
+.brand svg{width:38px;height:38px;flex:none}
+.brand-name{display:flex;flex-direction:column}
+.brand b{font:400 21px/1 var(--display);letter-spacing:.01em}
+.brand span span{font:600 11px/1 var(--text);letter-spacing:.08em;white-space:nowrap;text-transform:uppercase;color:var(--soft);margin-top:5px}
+.tel{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 2px;font:400 17px/1 var(--display);text-decoration:none;white-space:nowrap}
+.tel svg{width:18px;height:18px;flex:none;color:var(--copper-ink)}
+/* phones: the wordmark and the number must both fit on one row down to 360px */
+@media (max-width:440px){.brand{gap:8px}.brand svg{width:34px;height:34px}.brand b{font-size:20px}.brand span span{font-size:10px;letter-spacing:.06em}.tel svg{display:none}}
+@media (max-width:374px){.brand svg{width:30px;height:30px}.brand b{font-size:18px}.brand span span{font-size:10px;letter-spacing:.04em}.tel{font-size:16px}}
+
+/* ---------- Hero: a metallic epoxy floor under navy ---------- */
+.hero{padding:0;position:relative;background:var(--deep);color:var(--on-dark);overflow:hidden;isolation:isolate}
+.hero-photo{position:absolute;inset:0;z-index:-2}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:18% 60%}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,29,49,.84) 0%,rgba(11,29,49,.72) 55%,rgba(11,29,49,.88) 100%)}
+.hero-copy{position:relative;z-index:1;display:grid;gap:20px;justify-items:start;padding-top:64px;padding-bottom:72px}
+.hero h1{color:#fff;font-size:clamp(42px,12vw,80px);line-height:1.02;max-width:12ch}
+/* H1 bounce-in (after lpmr.co.uk): each letter slides in from 50px right with a slight overshoot, 20ms apart */
+.hero h1 .w{display:inline-block;white-space:nowrap}
+.hero h1 .c{display:inline-block;opacity:0;transform:translateX(50px);animation:letter-in 1s cubic-bezier(.34,1.56,.64,1) forwards;animation-delay:calc(var(--i) * 20ms)}
+@keyframes letter-in{to{opacity:1;transform:none}}
+.promise{font-size:clamp(17px,4.7vw,20px);line-height:1.5;color:var(--on-dark-soft);max-width:30ch}
+.promise b{color:var(--on-dark);font-weight:600}
+.actions{display:grid;gap:12px;width:100%;margin-top:4px}
+
+/* ---------- Service rows on navy (arrow-only hover) ---------- */
+.services{display:grid;gap:10px;margin-top:32px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:12px 14px 12px 22px;background:rgba(255,255,255,.06);border-radius:18px;color:var(--on-dark);text-decoration:none;font:400 20px/1.2 var(--display)}
+.row:hover,.row:focus-visible{outline:none;background:rgba(255,255,255,.06);box-shadow:none}
+.arrow{width:44px;height:44px;flex:none;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);color:var(--on-dark);transition:background-color .2s,color .2s}
+.arrow svg{width:18px;height:18px}
+.row:focus-visible .arrow{background:var(--copper);color:var(--ink);outline:3px solid var(--copper);outline-offset:3px}
+
+/* ---------- Finishes ---------- */
+.finishes{display:grid;gap:16px;margin-top:32px}
+.finish{position:relative;display:block;overflow:hidden;border-radius:var(--r-card);aspect-ratio:4/5;text-decoration:none;color:#fff;background:var(--navy)}
+.finish img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.finish::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(180deg,transparent,rgba(11,29,49,.88))}
+.finish-meta{position:absolute;inset:auto 18px 18px 22px;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.finish h3{color:#fff;font-size:26px}
+.finish .arrow{background:rgba(255,255,255,.16);color:#fff}
+.finish:focus-visible{outline:none}
+.finish:focus-visible .arrow{background:var(--copper);color:var(--ink);outline:3px solid var(--focus);outline-offset:3px}
+
+/* ---------- Care ---------- */
+.claims{list-style:none;margin:28px 0 0;padding:0;display:grid}
+.claims li{display:flex;align-items:center;gap:16px;padding:16px 0;font:400 clamp(20px,5.4vw,24px)/1.15 var(--display);color:var(--ink)}
+.claims li+li{border-top:1px solid var(--line)}
+.claims svg{width:40px;height:40px;flex:none;color:var(--copper-ink)}
+
+/* ---------- How it works ---------- */
+.steps{list-style:none;margin:36px 0 0;padding:0;display:grid;gap:24px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start;counter-increment:s}
+.steps li::before{content:counter(s);width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--copper);color:var(--ink);font:400 20px/1 var(--display)}
+.steps b{display:block;font:400 21px/1.2 var(--display);color:var(--on-dark);margin-top:4px}
+.steps span{display:block;margin-top:4px}
+
+/* ---------- Form ---------- */
+.ask .wrap{display:grid;gap:28px}
+form{background:var(--card);border-radius:var(--r-card);padding:clamp(20px,5vw,32px);display:grid;gap:22px;max-width:600px}
+.field{display:grid;gap:8px;min-width:0}
+.field label,.field legend{font:400 17px/1.2 var(--display);color:var(--ink);padding:0}
+.field legend{margin-bottom:10px}
+.field small{font:400 14px/1 var(--text);color:var(--soft);margin-left:4px}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+input[type=text],textarea{width:100%;font:16px/1.4 var(--text);color:var(--ink);background:var(--field);border:2px solid transparent;border-radius:var(--r-field);padding:13px 14px;min-height:52px;caret-color:var(--navy);transition:border-color .15s}
+textarea{min-height:110px;resize:vertical}
+input::placeholder,textarea::placeholder{color:var(--soft)}
+input[type=text]:focus,textarea:focus{outline:none;border-color:var(--focus)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips input{position:absolute;width:1px;height:1px;opacity:0;margin:0}
+.chips label{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:var(--pill);background:var(--field);border:2px solid transparent;font:16px/1 var(--text);color:var(--ink);cursor:pointer;margin:0;transition:border-color .15s,background-color .15s,color .15s}
+.chips input:focus-visible+label{outline:3px solid var(--focus);outline-offset:3px}
+.chips input:checked+label{background:var(--ink);color:#fff}
+.err{display:none;font-size:15px;color:var(--error)}
+.field.bad .err{display:block}
+.field.bad input[type=text],.field.bad textarea{border-color:var(--error)}
+form .btn-primary{width:100%}
+form .btn-primary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.after{font-size:15px;color:var(--soft)}
+.sent{color:var(--ink);font-weight:600}
+.sent a{white-space:nowrap;display:inline-block;padding:11px 0;margin:-11px 0}
+@media (max-width:380px){.chips label{padding:0 14px}}
+
+/* ---------- Close ---------- */
+.close .who{margin-top:14px;font-size:clamp(18px,5vw,20px);color:var(--on-dark-soft)}
+.bigtel{display:inline-flex;align-items:center;gap:12px;margin-top:28px;font:400 clamp(30px,9vw,52px)/1 var(--display);text-decoration:none;color:var(--on-dark);min-height:56px;white-space:nowrap}
+.bigtel svg{width:.8em;height:.8em;flex:none;color:var(--copper)}
+.area{margin-top:22px;max-width:40ch}
+
+/* ---------- Footer ---------- */
+footer{background-color:var(--deep);background-image:var(--texture);color:var(--on-dark-soft);padding:48px 0 calc(96px + env(safe-area-inset-bottom));font-size:16px}
+footer .wrap{display:grid;gap:10px}
+footer b{font:400 20px/1.2 var(--display);color:var(--on-dark)}
+.nw{white-space:nowrap}
+footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--on-dark);text-decoration:none}
+
+/* ---------- Floating text circle (one circle, never a bottom bar) ---------- */
+.float{position:fixed;z-index:15;right:calc(16px + env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:var(--copper);color:var(--ink);box-shadow:0 10px 28px rgba(8,22,40,.32);transform:translateY(120px);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.float.on{transform:none}
+.float svg{width:26px;height:26px}
+.float:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:50%}
+
+/* ---------- Motion: one fade-up, only for things below the first screen ---------- */
+.js .rise{transition:opacity .4s ease-out,transform .4s ease-out}
+.js .rise.below{opacity:0;transform:translateY(12px)}
+
+/* ---------- Desktop ---------- */
+@media (min-width:760px){
+  :root{--gutter:40px}
+  .top .wrap{min-height:76px}
+  .brand b{font-size:24px}
+  .tel{font-size:20px}
+  section{padding:96px 0}
+  .hero-copy{padding-top:112px;padding-bottom:128px}
+  .hero-photo img{object-position:62% 50%}
+  .hero::after{background:linear-gradient(90deg,rgba(11,29,49,.86) 0%,rgba(11,29,49,.66) 55%,rgba(11,29,49,.4) 100%),linear-gradient(180deg,rgba(11,29,49,.2),rgba(11,29,49,.5))}
+  .hero h1{max-width:14ch}
+  .promise{max-width:none}
+  .actions{grid-auto-flow:column;justify-content:start;width:auto}
+  .actions .btn{min-width:240px}
+  .services{grid-template-columns:1fr 1fr}
+  .finishes{grid-template-columns:repeat(3,1fr)}
+}
+@media (min-width:1024px){
+  .split{display:grid;grid-template-columns:1fr 1fr;column-gap:64px;align-items:start}
+  .split .claims{margin-top:0}
+  .ask .wrap{grid-template-columns:1fr 1.2fr;gap:64px;align-items:start}
+  .ask .head{position:sticky;top:40px}
+  .close .wrap{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:end}
+  .bigtel{margin-top:0}
+  .how .steps{grid-template-columns:repeat(3,1fr);gap:40px}
+  .steps b{font-size:22px}
+}
+/* hover styles only where there is a real pointer, so taps don't leave them stuck on */
+@media (hover:hover){
+.tel:hover{color:var(--copper-ink)}
+.btn-primary:hover{background:var(--copper-2);border-color:var(--copper-2)}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+.row:hover .arrow,.finish:hover .arrow{background:var(--copper);color:var(--ink)}
+input[type=text]:hover,textarea:hover{border-color:var(--focus)}
+.chips label:hover{border-color:var(--focus)}
+form .btn-primary:hover{outline:2px solid var(--focus);outline-offset:2px}
+.sent a:hover{color:var(--navy)}
+.bigtel:hover{color:var(--copper)}
+footer a:hover{color:var(--copper)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rise,.float,.btn,.arrow{transition:none}
+  .js .rise.below{opacity:1;transform:none}
+  .hero h1 .c{animation:none;opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<!--
+THESIS: An epoxy crew that wins trust by caring about the part nobody sees: the prep. One claim (your garage, finished like glass), three finishes to pick from, and an easy way to text a photo for a quote.
+OWN-WORLD: Off-white paper, logo-tile navy (#12304f) and deep navy (#0b1d31, faint diagonal lines) bands, copper from metallic epoxy veins as the one warm accent (fills only; #9a4a12 when it has to be text on light). Cal Sans display, system body at 16/1.7. Images are procedural renders of epoxy floors (tools/render-floors.html), never stock photos of other crews' jobs.
+STORY: The visitor sees a floor that shines, believes this crew will treat their garage carefully, picks a finish, and texts a photo for a free quote.
+FIRST VIEWPORT: Paper header with the dripping-G mark and wordmark left, tap-to-call number top right. Hero on a navy-washed metallic floor: eyebrow, "Your garage, finished like glass.", one promise line, two pill buttons (Get a free quote, Text us a photo).
+FORM: calm band system (lpmr.co.uk via DPG) with a photo-style hero; finish cards in the kit's work-card shape.
+-->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3h3.5l1.8 4.6-2.3 1.5a11 11 0 0 0 6 6l1.5-2.3L20 14.5V18a2 2 0 0 1-2.2 2A16 16 0 0 1 3 5.2 2 2 0 0 1 5 3z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-mark" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#12304f"/><g transform="translate(-2 -2)"><path d="M46.6 19.4A17 17 0 1 0 49 32H33" fill="none" stroke="#e39a5f" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M49 32v8.5c0 2.6-1.6 4-3.4 4" fill="none" stroke="#e39a5f" stroke-width="8" stroke-linecap="round"/><path d="M45.4 49.2c-2.3 3.1-3.4 5-3.4 6.4a3.4 3.4 0 0 0 6.8 0c0-1.4-1.1-3.3-3.4-6.4z" fill="#e39a5f"/></g></symbol>
+</svg>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Gorbachev Pourworks, epoxy flooring, back to top"><svg aria-hidden="true"><use href="#i-mark"/></svg><span class="brand-name"><b>Gorbachev</b><span>Pourworks · Epoxy Floors</span></span></a>
+    <a class="tel" href="tel:+15550100000"><svg aria-hidden="true"><use href="#i-phone"/></svg>(555) 010-0000</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" id="hero" aria-labelledby="h1">
+  <div class="hero-photo" aria-hidden="true">
+    <img src="img/hero-900.webp" srcset="img/hero-900.webp 900w, img/hero-1600.webp 1600w" sizes="100vw" alt="" width="1600" height="900" fetchpriority="high" decoding="async">
+  </div>
+  <div class="wrap hero-copy">
+    <span class="eyebrow">Epoxy floor coatings</span>
+    <h1 id="h1">Your garage, <span class="accent">finished like glass.</span></h1>
+    <p class="promise"><b>We take our time on the prep</b>, so the shine lasts for years.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#quote">Get a free quote</a>
+      <a class="btn btn-ghost" data-sms href="sms:+15550100000?&amp;body=Hi%20Gorbachev%20Pourworks%2C%20I%20found%20your%20website.%20Here%27s%20a%20photo%20of%20my%20floor%3A%20"><svg aria-hidden="true"><use href="#i-chat"/></svg>Text us a photo</a>
+    </div>
+  </div>
+</section>
+
+<section class="on-navy" aria-labelledby="h-svc">
+  <div class="wrap">
+    <div class="head rise">
+      <span class="eyebrow">What we coat</span>
+      <h2 id="h-svc">Bare concrete in, <span class="accent">a floor you'll show off out.</span></h2>
+    </div>
+    <nav class="services rise" aria-label="Floors we coat">
+      <a class="row" href="#quote" data-room="Garage">Garage floors<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a>
+      <a class="row" href="#quote" data-room="Basement">Basements<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a>
+      <a class="row" href="#quote" data-room="Workshop">Workshops<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a>
+      <a class="row" href="#quote" data-room="Commercial">Shops &amp; showrooms<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a>
+      <a class="row" href="#quote" data-room="Commercial">Commercial floors<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a>
+      <a class="row" href="#quote" data-room="Repair">Crack &amp; chip repair<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="on-paper" aria-labelledby="h-finish">
+  <div class="wrap">
+    <h2 id="h-finish" class="rise">Pick your finish.</h2>
+    <div class="finishes">
+      <a class="finish rise" href="#quote" data-finish="Flake"><img src="img/flake.webp" alt="Grey flake epoxy floor with a glossy clear coat" width="640" height="800" loading="lazy" decoding="async"><span class="finish-meta"><h3>Flake</h3><span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></span></a>
+      <a class="finish rise" href="#quote" data-finish="Metallic"><img src="img/metallic.webp" alt="Copper and charcoal metallic epoxy floor with swirling veins" width="720" height="900" loading="lazy" decoding="async"><span class="finish-meta"><h3>Metallic</h3><span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></span></a>
+      <a class="finish rise" href="#quote" data-finish="Solid colour"><img src="img/solid.webp" alt="Smooth grey epoxy floor with a painted yellow safety line" width="720" height="900" loading="lazy" decoding="async"><span class="finish-meta"><h3>Solid colour</h3><span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="on-paper" aria-labelledby="h-care" style="padding-top:0">
+  <div class="wrap split">
+    <div class="rise">
+      <h2 id="h-care">We treat your garage like it's ours.</h2>
+      <p class="lede" style="margin-top:16px">It holds your car, your tools and half your life. We move only what we have to, cover what stays, and put everything back where it was.</p>
+    </div>
+    <ul class="claims">
+      <li class="rise"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="5"/><path d="M20 6v4M20 30v4M6 20h4M30 20h4"/></svg>Ground smooth before we coat</li>
+      <li class="rise"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 30h28"/><path d="M11 30l5-9 4 5 3-7 6 11"/></svg>Cracks and chips filled first</li>
+      <li class="rise"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 34V16l12-9 12 9v18z"/><path d="M15 34V23h10v11"/></svg>Your things covered and put back</li>
+      <li class="rise"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 5l-9 17"/><path d="M12 21l10 5-3 9H7z"/><path d="M12 35l2-6M16 35l1.5-4"/></svg>Swept clean before we leave</li>
+    </ul>
+  </div>
+</section>
+
+<section class="on-deep how" aria-labelledby="h-how">
+  <div class="wrap">
+    <h2 id="h-how" class="rise">How it <span class="accent">works.</span></h2>
+    <ol class="steps">
+      <li class="rise"><div><b>Text us a photo.</b><span>Of the floor as it is now, and roughly how big it is.</span></div></li>
+      <li class="rise"><div><b>We come and look.</b><span>We check the concrete in person and give you a free quote.</span></div></li>
+      <li class="rise"><div><b>We prep and pour.</b><span>Then we tell you when it's ready to walk on and park on.</span></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="on-paper ask" id="quote" aria-labelledby="h-ask">
+  <div class="wrap">
+    <div class="head rise">
+      <span class="eyebrow">Free quote</span>
+      <h2 id="h-ask">Tell us about your floor</h2>
+      <p class="lede">Not sure which finish? Leave it open and we'll help you choose.</p>
+    </div>
+    <form id="quoteForm" class="rise" novalidate>
+      <fieldset class="field" id="f-room">
+        <legend>Which floor?</legend>
+        <div class="chips">
+          <input type="radio" name="room" id="r1" value="Garage" aria-describedby="e-room"><label for="r1">Garage</label>
+          <input type="radio" name="room" id="r2" value="Basement"><label for="r2">Basement</label>
+          <input type="radio" name="room" id="r3" value="Workshop"><label for="r3">Workshop</label>
+          <input type="radio" name="room" id="r4" value="Commercial"><label for="r4">Shop or business</label>
+          <input type="radio" name="room" id="r5" value="Repair"><label for="r5">Repair only</label>
+        </div>
+        <p class="err" id="e-room">Pick the floor you'd like done.</p>
+      </fieldset>
+      <fieldset class="field">
+        <legend>Finish <small>(optional)</small></legend>
+        <div class="chips">
+          <input type="radio" name="finish" id="x1" value="Flake"><label for="x1">Flake</label>
+          <input type="radio" name="finish" id="x2" value="Metallic"><label for="x2">Metallic</label>
+          <input type="radio" name="finish" id="x3" value="Solid colour"><label for="x3">Solid colour</label>
+          <input type="radio" name="finish" id="x4" value="Not sure yet"><label for="x4">Not sure yet</label>
+        </div>
+      </fieldset>
+      <div class="field" id="f-name">
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" autocomplete="name" maxlength="60" placeholder="First name is fine" aria-describedby="e-name">
+        <p class="err" id="e-name">Add your name so we know who's texting.</p>
+      </div>
+      <div class="field" id="f-town">
+        <label for="town">Your town</label>
+        <input type="text" id="town" name="town" autocomplete="address-level2" maxlength="60" aria-describedby="e-town">
+        <p class="err" id="e-town">Add your town so we can check we cover it.</p>
+      </div>
+      <div class="field">
+        <label for="size">How big is it? <small>(optional)</small></label>
+        <input type="text" id="size" name="size" maxlength="60" placeholder="e.g. two-car garage">
+      </div>
+      <div class="field">
+        <label for="notes">Anything else? <small>(optional)</small></label>
+        <textarea id="notes" name="notes" maxlength="600" placeholder="Oil stains, old paint, a drain, a deadline…"></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit"><svg aria-hidden="true"><use href="#i-chat"/></svg>Text this to us</button>
+      <p class="sent" id="sent" role="status" hidden>Didn't open your messages? Call us at <a href="tel:+15550100000">(555) 010-0000</a>.</p>
+      <p class="after">Opens your messages with this written out. Add a photo before you send.</p>
+    </form>
+  </div>
+</section>
+
+<section class="on-navy close" id="close" aria-labelledby="h-close">
+  <div class="wrap">
+    <div class="rise">
+      <h2 id="h-close">Gorbachev Pourworks</h2>
+      <p class="who">Epoxy floors for garages, basements and shops.</p>
+      <p class="area">Tell us your town and we'll tell you straight away if we cover it.</p>
+    </div>
+    <a class="bigtel rise" href="tel:+15550100000"><svg aria-hidden="true"><use href="#i-phone"/></svg>(555) 010-0000</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>Gorbachev Pourworks</b>
+    <span>Epoxy flooring · <span class="nw">(555) 010-0000</span></span>
+    <a href="mailto:hello@example.com">hello@example.com</a>
+  </div>
+</footer>
+
+<a class="float" id="float" data-sms href="sms:+15550100000?&amp;body=Hi%20Gorbachev%20Pourworks%2C%20I%20found%20your%20website.%20Here%27s%20a%20photo%20of%20my%20floor%3A%20" aria-label="Text us a photo"><svg aria-hidden="true"><use href="#i-chat"/></svg></a>
+
+<script>
+/* ===== Config ===== */
+var CONFIG = {
+  FLOAT: true,               // the floating text circle; false removes it
+  SMS: '+15550100000',       // placeholder: the client's real mobile goes here (and in the tel:/sms: links above)
+  NAME: 'Gorbachev Pourworks'
+};
+document.documentElement.classList.add('js');
+
+/* ===== Hero H1 bounce-in: split into letters (JS only, so no-JS and reduced motion keep the plain heading) ===== */
+(function(){
+  var h=document.getElementById('h1');
+  if(!h||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var plain=h.innerHTML,i=0,last=null;
+  h.setAttribute('aria-label',h.textContent.replace(/\s+/g,' ').trim());
+  function split(node,into){
+    [].slice.call(node.childNodes).forEach(function(n){
+      if(n.nodeType===3){
+        n.textContent.split(/(\s+)/).forEach(function(part){
+          if(!part)return;
+          if(/^\s+$/.test(part)){into.appendChild(document.createTextNode(' '));return}
+          var w=document.createElement('span');w.className='w';w.setAttribute('aria-hidden','true');
+          for(var k=0;k<part.length;k++){var c=document.createElement('span');c.className='c';c.style.setProperty('--i',i++);c.textContent=part[k];w.appendChild(c);last=c}
+          into.appendChild(w);
+        });
+      }else if(n.nodeType===1){var copy=n.cloneNode(false);split(n,copy);into.appendChild(copy)}
+    });
+  }
+  var frag=document.createDocumentFragment();split(h,frag);h.textContent='';h.appendChild(frag);
+  // once the last letter lands, put the plain heading back so kerning and text selection return
+  if(last)last.addEventListener('animationend',function(){h.innerHTML=plain;h.removeAttribute('aria-label')});
+})();
+
+/* ===== Service rows and finish cards pre-select the matching chip ===== */
+(function(){
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('[data-room],[data-finish]');if(!a)return;
+    var room=a.getAttribute('data-room'),fin=a.getAttribute('data-finish');
+    if(room){var r=document.querySelector('input[name=room][value="'+room+'"]');if(r)r.checked=true;document.getElementById('f-room').classList.remove('bad')}
+    if(fin){var f=document.querySelector('input[name=finish][value="'+fin+'"]');if(f)f.checked=true}
+  });
+})();
+
+/* ===== Quote form: composes a text ===== */
+(function(){
+  var form=document.getElementById('quoteForm');if(!form)return;
+  function val(id){return document.getElementById(id).value.trim()}
+  function mark(id,bad){var f=document.getElementById(id);f.classList.toggle('bad',bad);var c=f.querySelector('input[type=text],textarea');if(c)c.setAttribute('aria-invalid',bad?'true':'false')}
+  form.addEventListener('input',function(e){var f=e.target.closest('.field');if(f&&f.classList.contains('bad')&&(e.target.type==='radio'||e.target.value.trim()))f.classList.remove('bad')});
+  form.addEventListener('change',function(e){if(e.target.name==='room')document.getElementById('f-room').classList.remove('bad')});
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var room=form.querySelector('input[name=room]:checked'),fin=form.querySelector('input[name=finish]:checked');
+    var name=val('name'),town=val('town'),size=val('size'),notes=val('notes');
+    mark('f-room',!room);mark('f-name',!name);mark('f-town',!town);
+    if(!room){document.getElementById('r1').focus();return}
+    if(!name){document.getElementById('name').focus();return}
+    if(!town){document.getElementById('town').focus();return}
+    var msg='Hi '+CONFIG.NAME+', this is '+name+'. I\'d like a free quote.\nFloor: '+room.value+(room.value==='Repair'?' only':'');
+    if(fin)msg+='\nFinish: '+fin.value;
+    msg+='\nTown: '+town;
+    if(size)msg+='\nSize: '+size;
+    if(notes)msg+='\n'+notes;
+    msg+='\nI\'ll attach a photo.';
+    location.href='sms:'+CONFIG.SMS+'?&body='+encodeURIComponent(msg);
+    // if no messages app opened (desktop, some in-app browsers), say what to do instead
+    setTimeout(function(){document.getElementById('sent').hidden=false},900);
+  });
+})();
+
+/* ===== Floating text circle: shows after the hero, hides while the form is on screen ===== */
+(function(){
+  var fl=document.getElementById('float');if(!fl)return;
+  if(!CONFIG.FLOAT||!('IntersectionObserver' in window)){fl.remove();return}
+  var pastHero=false,formIn=false;
+  function sync(){var on=pastHero&&!formIn;fl.classList.toggle('on',on);fl.tabIndex=on?0:-1;fl.setAttribute('aria-hidden',on?'false':'true')}
+  new IntersectionObserver(function(es){pastHero=!es[0].isIntersecting;sync()},{threshold:.15}).observe(document.getElementById('hero'));
+  new IntersectionObserver(function(es){formIn=es[0].isIntersecting;sync()},{rootMargin:'-15% 0px -15% 0px'}).observe(document.getElementById('quoteForm'));
+  sync();
+})();
+
+/* ===== Fade-up: everything is visible at rest; only what starts below the first screen rises 12px in ===== */
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('below');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  [].forEach.call(document.querySelectorAll('.rise'),function(el){if(el.getBoundingClientRect().top>innerHeight){el.classList.add('below');io.observe(el)}});
+})();
+</script>
+</body>
+</html>
