@@ -10,17 +10,17 @@
 - **Motion:** hero H1 bounce-in, `.rise` fade-up and the floating circle all work. Under reduced motion and with no JS, everything shows at once (checked).
 - **Link preview:** `og.jpg` (1200x630) with the logo, the name and the headline.
 
-## Images: all generated for this site, none sourced
-Every image on the site is a procedural render I made for it in `tools/render-floors.html` (noise-warped metallic, scattered-flake and solid-colour textures, laid onto a floor in perspective with a reflected window in the clear coat). Re-render with `tools/render.sh`. No photo of anyone else's work is used. The licence is ours to give: the client can own them outright.
+## Images
+The hero, link card and logo are procedural renders I made for this site in `tools/render-floors.html` (re-render with `tools/render.sh`); the licence is ours to give. The three "Pick your finish" cards are **photos Ellie supplied on 2026-10-20**, which replaced my renders because those looked fake. Their source and licence aren't recorded: **confirm before handing the site over** (originals kept in `src-assets/ellie/`, not committed).
 
 | File | What it is | Source | Licence |
 |---|---|---|---|
 | `img/hero-900/1600/2400.webp` | navy and copper metallic epoxy, looking across the floor (desktop) | generated, `tools/render-floors.html#hero` | original work for this site, no third-party rights |
 | `img/hero-phone.webp` | same floor, portrait, window light low in the frame (phones) | generated, `#heroPhone` | same |
-| `img/flake(-900).webp` | grey/black/white flake broadcast with gloss | generated, `#flake` | same |
-| `img/metallic(-1080).webp` | copper and charcoal metallic | generated, `#metallic` | same |
-| `img/solid(-1080).webp` | grey solid color with a yellow safety line | generated, `#solid` | same |
-| `og.jpg`, `favicon.svg`, `apple-touch-icon.png` | link card and logo | made from the above + the drawn logo (`tools/og.html`) | same |
+| `img/flake-photo.webp` | grey/black/white/blue flake floor in a workshop | photo supplied by Ellie, 2026-10-20 | **unknown, to confirm** |
+| `img/metallic-photo.webp` | copper-brown metallic floor, ceiling lights reflected | photo supplied by Ellie, 2026-10-20 | **unknown, to confirm** |
+| `img/solid-photo.webp` | glossy light grey solid-colour floor | photo supplied by Ellie, 2026-10-20 | **unknown, to confirm** |
+| `og.jpg`, `favicon.svg`, `apple-touch-icon.png` | link card and logo | made from the hero render + the drawn logo (`tools/og.html`) | original work for this site |
 
 **Looked for and rejected (so nobody re-checks them):**
 - Wikimedia Commons "123 Resinous Epoxy Floor in Ball Park" (CC BY 2.0): it shows Bud Light and a team-store logo, which are trademarks.
@@ -47,7 +47,7 @@ Every image on the site is a procedural render I made for it in `tools/render-fl
 - **Email:** `hello@example.com` (footer only).
 - **Facebook / Instagram:** none exists, so there's no "see more of our work" link under the finishes and none in the footer. Add both once there's a page.
 - **Service area, hours, years, licence/insurance, prices, reviews:** unknown, and none are stated anywhere. The closing band says "Tell us your town and we'll tell you straight away if we cover it."
-- **Real job photos:** none. The finish cards are renders of finishes, not "our work". Swap in real jobs as soon as there are some (one hero, then a work band of 3–6).
+- **Real job photos:** none confirmed as the client's. The finish cards show finish types (Ellie's photos), not "our work"; if they turn out to be the client's own jobs, say so. Swap in real jobs as soon as there are some (one hero, then a work band of 3–6).
 
 ## Questions for the owner
 1. Which name do you like, and is it OK to use it on a public site?

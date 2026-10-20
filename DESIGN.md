@@ -158,7 +158,7 @@ components:
 
 A garage floor, freshly coated, seen under a navy evening: a pale, clean paper ground, two navies taken from the logo tile, and a single copper that comes from the veins of a metallic epoxy pour. The page reads as calm, full-bleed bands that alternate light and dark, so every new section announces itself by its ground rather than by rules or ornaments. Shapes are soft and borderless; type is one friendly display face over a plain system body.
 
-Density is low and phone-first. Each band carries one heading, one short supporting idea, and one kind of thing to tap. Imagery is procedural: every floor on the page is a render produced by `tools/render-floors.html` (re-rendered with `tools/render.sh`), never a stock photo or another crew's job. The hero gets two renders, a portrait one for phones with the lit floor sitting under the buttons and a wide one for desktop.
+Density is low and phone-first. Each band carries one heading, one short supporting idea, and one kind of thing to tap. Imagery: the hero is a procedural render from `tools/render-floors.html` (re-rendered with `tools/render.sh`); the three finish cards are real photos Ellie supplied (2026-10-20), because the rendered finishes read as fake. The hero gets two renders, a portrait one for phones with the lit floor sitting under the buttons and a wide one for desktop.
 
 Motion is sparse and gated: the hero H1 bounces in letter by letter once, content below the first screen rises 12px as it arrives, and a chip pulses one copper ring when a tap elsewhere pre-selected it. Everything is visible at rest, without JS, and under reduced motion.
 
@@ -179,7 +179,7 @@ Paper and two navies carry the page; copper is the single warm voice, poured in 
 - **Burnt Copper** (`copper-ink`): copper as text or icon on light grounds (the accent phrase of a heading on paper, care-list icons).
 
 ### Secondary
-- **Logo-Tile Navy** (`navy`): the services band and the closing band; also the placeholder fill behind finish renders and the logo tile itself.
+- **Logo-Tile Navy** (`navy`): the services band and the closing band; also the placeholder fill behind finish photos and the logo tile itself.
 - **Deep Pour Navy** (`deep`): the "how it works" band, the footer, and the hero ground under the render. Always paired with the line texture when it is a band.
 
 ### Neutral
@@ -251,7 +251,7 @@ Flat. Depth comes from tonal layering: band against band, white card on paper, f
 
 ## Shapes
 
-Soft and borderless. Three radii do all the work: 10px for fields, 18px for service rows, 24px for cards and the form, and full pills for buttons, chips, arrow circles, step discs and the floating circle. Borders appear only as state (the 2px transparent border on buttons, fields and chips that becomes Signal Blue or Error Red) or as the care list's hairline dividers. Finish renders are clipped by the card radius with a bottom gradient (from 45% down to 88% deep navy) under their titles. Icons are drawn as inline SVG line art, round caps and joins, 2.2-2.6px strokes.
+Soft and borderless. Three radii do all the work: 10px for fields, 18px for service rows, 24px for cards and the form, and full pills for buttons, chips, arrow circles, step discs and the floating circle. Borders appear only as state (the 2px transparent border on buttons, fields and chips that becomes Signal Blue or Error Red) or as the care list's hairline dividers. Finish photos are clipped by the card radius with a bottom gradient (from 45% down to 88% deep navy) under their titles. Icons are drawn as inline SVG line art, round caps and joins, 2.2-2.6px strokes.
 
 ## Components
 
@@ -269,7 +269,7 @@ Full pills, confident, never more than two side by side.
 
 ### Cards / Containers
 - **Form card:** 24px radius, white, padding clamp(20px, 5vw, 32px), max 600px, 22px between fields, no border, no shadow.
-- **Finish card:** a whole-card link, 24px radius, 4:3 on phones and 4:5 from 760px, render filling it with `object-fit: cover`, bottom gradient, white Cal Sans 26px name bottom-left and an arrow circle bottom-right.
+- **Finish card:** a whole-card link, 24px radius, 4:3 on phones and 4:5 from 760px, photo filling it with `object-fit: cover` (the landscape solid-colour photo is positioned 72% across to keep its window reflections), bottom gradient, white Cal Sans 26px name bottom-left and an arrow circle bottom-right.
 
 ### Inputs / Fields
 - **Style:** Field Tint fill, 10px radius, 2px transparent border, 52px min height (textarea 110px, vertical resize), Ink text, Soft Slate placeholders, navy caret.
@@ -311,7 +311,7 @@ One 60px copper circle, bottom right inside the safe area, chat icon in Ink, the
 - **Do** set every heading, label, button and phone number in Cal Sans at 400, and every explanation in the system stack at 16px/1.7.
 - **Do** keep tap targets at 44px or more (buttons 56px, chips 48px, arrows 44px, footer links 44px).
 - **Do** put hover styles inside `@media (hover:hover)` and give form controls a Signal Blue outline on hover and focus.
-- **Do** show floors as renders from `tools/render-floors.html`, with a separate portrait render for the phone hero.
+- **Do** use real photos for the finish cards (renders of flake/metallic/solid looked fake); the hero stays a render, with a separate portrait render for phones.
 - **Do** keep everything visible at rest, without JS and under reduced motion.
 
 ### Don't:
