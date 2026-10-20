@@ -176,19 +176,19 @@ Paper and two navies carry the page; copper is the single warm voice, poured in 
 ### Primary
 - **Metallic Copper** (`copper`): the one accent. Fills only: primary buttons, step-number discs, arrow circles on hover and focus, the floating text circle, the selection highlight, the chip "picked" ring. On dark bands and the hero it may also be text (the accent phrase of a heading, the big phone icon). Text on copper is always Ink.
 - **Lit Copper** (`copper-2`): the primary button's hover fill, nothing else.
-- **Burnt Copper** (`copper-ink`): copper as text or icon on light grounds (the accent phrase of a heading on paper, care-list icons, the header phone icon and its hover).
+- **Burnt Copper** (`copper-ink`): copper as text or icon on light grounds (the accent phrase of a heading on paper, care-list icons).
 
 ### Secondary
 - **Logo-Tile Navy** (`navy`): the services band and the closing band; also the placeholder fill behind finish renders and the logo tile itself.
 - **Deep Pour Navy** (`deep`): the "how it works" band, the footer, and the hero ground under the render. Always paired with the line texture when it is a band.
 
 ### Neutral
-- **Paper** (`paper`): page ground, header, light bands, the read-only message box.
+- **Paper** (`paper`): page ground, light bands, the read-only message box.
 - **White Card** (`card`): the quote form card and the plain button; white type on finish cards and the hero H1.
 - **Field Tint** (`field`): inputs and unselected chips on the white card.
 - **Ink** (`ink`): headings on light, text on copper, the selected chip fill.
 - **Slate Body** (`body`): running text on light.
-- **Soft Slate** (`soft`): ledes, helper text, placeholders, the header descriptor.
+- **Soft Slate** (`soft`): ledes, helper text, placeholders.
 - **Frost** (`on-dark`) and **Mist** (`on-dark-soft`): headings and running text on navy, deep and the hero.
 - **Hairline** (`line`): the divider between care-list items and the plain button's border.
 
@@ -230,7 +230,7 @@ Paper and two navies carry the page; copper is the single warm voice, poured in 
 
 A single centered column, max 1160px, with a 20px gutter on phones and 40px from 760px. Bands are full-bleed; content sits inside the column. Section padding is 64px on phones and 96px from 760px; a band that continues the previous band's ground drops its top padding so two paper bands read as one.
 
-Breakpoints: 760px (desktop rhythm, two-column service rows, three finish cards at 4:5, hero buttons side by side at min 240px), 1024px (split layouts: care heading beside its list, form heading sticky beside the form at 1fr / 1.2fr, closing band name beside the big number, steps in three columns, all with a 64px column gap). A landscape-phone query (min-width 760px, max-height 520px) tightens the hero so its buttons stay on the first screen. Small-phone queries at 440px, 380px and 374px shrink the mark, drop the wordmark's "· Epoxy Floors" and tighten chips so the header stays on one row.
+Breakpoints: 760px (desktop rhythm, two-column service rows, three finish cards at 4:5, hero button at min 240px), 1024px (split layouts: care heading beside its list, form heading sticky beside the form at 1fr / 1.2fr, closing band name beside the big number, steps in three columns, all with a 64px column gap). A landscape-phone query (min-width 760px, max-height 520px) tightens the hero so its button stays on the first screen. Small-phone queries at 440px, 380px and 374px shrink the mark, drop the wordmark's "· Epoxy Floors" and tighten chips so the header stays on one row.
 
 Internal rhythm: 10px between stacked rows and chips, 16px between heading parts and list items, 20-28px between hero and form groups, 32px between a heading and its grid.
 
@@ -278,7 +278,8 @@ Full pills, confident, never more than two side by side.
 - **Labels:** Cal Sans 17px, `(optional)` in 14px Soft Slate beside it.
 
 ### Navigation
-- **Header:** paper, 64px tall (76px desktop), the dripping-G mark on its rounded navy tile and a two-line wordmark left, the tap-to-call number right in Cal Sans with a burnt-copper phone icon. No menu. Number hover goes Burnt Copper.
+- **Header:** no band of its own: it sits on top of the hero (absolute, transparent, with a soft navy fade at the top edge for contrast), 64px tall (76px desktop). White wordmark with a pale descriptor, the mark's navy tile ringed in faint white so it reads on navy, the tap-to-call number right in white Cal Sans with a copper phone icon. No menu. Number hover goes light copper.
+- **Hero:** fills the whole first screen (`min-height:100svh`), content centred vertically; the page opens on nothing but the hero.
 - **Footer:** deep navy with the line texture, name line and email only, links at 44px min height, hover copper.
 
 ### Service Rows

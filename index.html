@@ -55,7 +55,7 @@ body{margin:0;font:16px/1.7 var(--text);color:var(--body);background:var(--paper
 img,svg{display:block}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
-.on-navy :focus-visible,.on-deep :focus-visible,.hero :focus-visible,footer :focus-visible{outline-color:var(--copper)}
+.on-navy :focus-visible,.on-deep :focus-visible,.hero :focus-visible,.top :focus-visible,footer :focus-visible{outline-color:var(--copper)}
 .wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 var(--gutter)}
 h1,h2,h3{margin:0;font-family:var(--display);font-weight:400;line-height:1.08;letter-spacing:-.005em;color:var(--ink);text-wrap:balance}
 h2{font-size:clamp(30px,7.6vw,48px)}
@@ -85,7 +85,11 @@ section{padding:64px 0}
 .btn-primary{background:var(--copper);color:var(--ink);border-color:var(--copper)}
 
 /* ---------- Header ---------- */
-.top{background:var(--paper);color:var(--ink)}
+/* the header sits on the hero (no paper band), so the first screen is all hero */
+.top{position:absolute;top:0;left:0;right:0;z-index:5;background:linear-gradient(180deg,rgba(11,29,49,.55),rgba(11,29,49,0));color:#fff}
+.top .brand span span{color:rgba(244,247,251,.78)}
+.top .tel svg{color:var(--copper)}
+.top .brand svg{border-radius:9px;box-shadow:0 0 0 1px rgba(244,247,251,.22)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding-top:max(8px,env(safe-area-inset-top))}
 .brand{display:flex;align-items:center;gap:10px;min-height:44px;text-decoration:none;line-height:1}
 .brand svg{width:38px;height:38px;flex:none}
@@ -101,12 +105,12 @@ section{padding:64px 0}
 @media (max-width:374px){.brand svg{width:32px;height:32px}.brand b{font-size:19px}.tel{font-size:16px}.tel svg{display:none}}
 
 /* ---------- Hero: a metallic epoxy floor under navy ---------- */
-.hero{padding:0;position:relative;background:var(--deep);color:var(--on-dark);overflow:hidden;isolation:isolate}
+.hero{padding:0;position:relative;min-height:100vh;min-height:100svh;display:grid;align-content:center;background:var(--deep);color:var(--on-dark);overflow:hidden;isolation:isolate}
 .hero-photo{position:absolute;inset:0;z-index:-2}
 .hero-photo picture{display:block;width:100%;height:100%}
 .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 100%}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,29,49,.86) 0%,rgba(11,29,49,.8) 66%,rgba(11,29,49,.3) 100%)}
-.hero-copy{position:relative;z-index:1;display:grid;gap:20px;justify-items:start;padding-top:56px;padding-bottom:132px}
+.hero-copy{position:relative;z-index:1;display:grid;gap:20px;justify-items:start;padding-top:104px;padding-bottom:72px}
 .hero h1{color:#fff;font-size:clamp(42px,12vw,80px);line-height:1.02;max-width:12ch}
 /* H1 bounce-in (after lpmr.co.uk): each letter slides in from 50px right with a slight overshoot, 20ms apart */
 .hero h1 .w{display:inline-block;white-space:nowrap}
@@ -212,7 +216,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--on-d
   .brand b{font-size:24px}
   .tel{font-size:20px}
   section{padding:96px 0}
-  .hero-copy{padding-top:112px;padding-bottom:128px}
+  .hero-copy{padding-top:132px;padding-bottom:96px}
   .hero-photo img{object-position:62% 50%}
   .hero::after{background:linear-gradient(90deg,rgba(11,29,49,.86) 0%,rgba(11,29,49,.66) 55%,rgba(11,29,49,.4) 100%),linear-gradient(180deg,rgba(11,29,49,.2),rgba(11,29,49,.5))}
   .hero h1{max-width:14ch}
@@ -225,7 +229,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--on-d
   .finish{aspect-ratio:4/5}
 }
 /* landscape phones: keep the hero's buttons on the first screen */
-@media (min-width:760px) and (max-height:520px){.hero-copy{padding-top:44px;padding-bottom:52px}.hero h1{font-size:clamp(42px,7vw,60px)}}
+@media (min-width:760px) and (max-height:520px){.hero-copy{padding-top:80px;padding-bottom:20px;gap:14px}.hero h1{font-size:clamp(36px,6vw,52px)}}
 @media (min-width:1024px){
   .split{display:grid;grid-template-columns:1fr 1fr;column-gap:64px;align-items:start}
   .split .claims{margin-top:0}
@@ -238,7 +242,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--on-d
 }
 /* hover styles only where there is a real pointer, so taps don't leave them stuck on */
 @media (hover:hover){
-.tel:hover{color:var(--copper-ink)}
+.tel:hover{color:var(--copper-2)}
 .btn-primary:hover{background:var(--copper-2);border-color:var(--copper-2)}
 .row:hover .arrow,.finish:hover .arrow{background:var(--copper);color:var(--ink)}
 input[type=text]:hover,textarea:hover{border-color:var(--focus)}
@@ -262,7 +266,7 @@ footer a:hover{color:var(--copper)}
 THESIS: An epoxy crew that wins trust by caring about the part nobody sees: the prep. One claim (your garage, finished like glass), three finishes to pick from, and an easy way to text a photo for a quote.
 OWN-WORLD: Off-white paper, logo-tile navy (#12304f) and deep navy (#0b1d31, faint diagonal lines) bands, copper from metallic epoxy veins as the one warm accent (fills only; #9a4a12 when it has to be text on light). Cal Sans display, system body at 16/1.7. Images are procedural renders of epoxy floors (tools/render-floors.html), never stock photos of other crews' jobs.
 STORY: The visitor sees a floor that shines, believes this crew will treat their garage carefully, picks a finish, and texts a photo for a free quote.
-FIRST VIEWPORT: Paper header with the dripping-G mark and wordmark left, tap-to-call number top right. Hero on a navy-washed metallic floor: eyebrow, "Your garage, finished like glass.", one promise line, one pill button (Get a free quote); texting lives in the floating circle below the hero.
+FIRST VIEWPORT: Full-height hero; a transparent header sits on it with the dripping-G mark and wordmark left, tap-to-call number top right. Hero on a navy-washed metallic floor: eyebrow, "Your garage, finished like glass.", one promise line, one pill button (Get a free quote); texting lives in the floating circle below the hero.
 FORM: house default calm-photo-style (Ellie 2026-10-19), no concept roll; photo-style hero from a generated render (phone gets its own portrait render with the lit floor below the buttons); finish cards in the kit's work-card shape.
 -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
