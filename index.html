@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Gorbachev Pourworks · Epoxy floors for garages, basements and shops</title>
-<meta name="description" content="Gorbachev Pourworks lays flake, metallic and solid-colour epoxy floors in garages, basements, workshops and shops. Text us a photo for a free quote.">
+<meta name="description" content="Gorbachev Pourworks lays flake, metallic and solid-color epoxy floors in garages, basements, workshops and shops. Text us a photo for a free quote.">
 <meta name="theme-color" content="#f4f6fb">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Gorbachev Pourworks · Your garage, finished like glass.">
@@ -16,7 +16,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preload" as="image" href="img/hero-900.webp" imagesrcset="img/hero-900.webp 900w, img/hero-1600.webp 1600w" imagesizes="100vw">
+<link rel="preload" as="image" href="img/hero-phone.webp" media="(max-width:759px)">
+<link rel="preload" as="image" href="img/hero-1600.webp" imagesrcset="img/hero-900.webp 900w, img/hero-1600.webp 1600w, img/hero-2400.webp 2400w" imagesizes="100vw" media="(min-width:760px)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap">
@@ -103,9 +104,10 @@ section{padding:64px 0}
 /* ---------- Hero: a metallic epoxy floor under navy ---------- */
 .hero{padding:0;position:relative;background:var(--deep);color:var(--on-dark);overflow:hidden;isolation:isolate}
 .hero-photo{position:absolute;inset:0;z-index:-2}
-.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:18% 60%}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,29,49,.84) 0%,rgba(11,29,49,.72) 55%,rgba(11,29,49,.88) 100%)}
-.hero-copy{position:relative;z-index:1;display:grid;gap:20px;justify-items:start;padding-top:64px;padding-bottom:72px}
+.hero-photo picture{display:block;width:100%;height:100%}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,29,49,.86) 0%,rgba(11,29,49,.8) 66%,rgba(11,29,49,.3) 100%)}
+.hero-copy{position:relative;z-index:1;display:grid;gap:20px;justify-items:start;padding-top:56px;padding-bottom:132px}
 .hero h1{color:#fff;font-size:clamp(42px,12vw,80px);line-height:1.02;max-width:12ch}
 /* H1 bounce-in (after lpmr.co.uk): each letter slides in from 50px right with a slight overshoot, 20ms apart */
 .hero h1 .w{display:inline-block;white-space:nowrap}
@@ -116,7 +118,7 @@ section{padding:64px 0}
 .actions{display:grid;gap:12px;width:100%;margin-top:4px}
 
 /* ---------- Service rows on navy (arrow-only hover) ---------- */
-.services{display:grid;gap:10px;margin-top:32px}
+.services{list-style:none;padding:0;display:grid;gap:10px;margin:32px 0 0}
 .row{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:12px 14px 12px 22px;background:rgba(255,255,255,.06);border-radius:18px;color:var(--on-dark);text-decoration:none;font:400 20px/1.2 var(--display)}
 .row:hover,.row:focus-visible{outline:none;background:rgba(255,255,255,.06);box-shadow:none}
 .arrow{width:44px;height:44px;flex:none;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);color:var(--on-dark);transition:background-color .2s,color .2s}
@@ -125,7 +127,7 @@ section{padding:64px 0}
 
 /* ---------- Finishes ---------- */
 .finishes{display:grid;gap:16px;margin-top:32px}
-.finish{position:relative;display:block;overflow:hidden;border-radius:var(--r-card);aspect-ratio:4/5;text-decoration:none;color:#fff;background:var(--navy)}
+.finish{position:relative;display:block;overflow:hidden;border-radius:var(--r-card);aspect-ratio:4/3;text-decoration:none;color:#fff;background:var(--navy)}
 .finish img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .finish::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(180deg,transparent,rgba(11,29,49,.88))}
 .finish-meta{position:absolute;inset:auto 18px 18px 22px;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
@@ -164,14 +166,20 @@ input[type=text]:focus,textarea:focus{outline:none;border-color:var(--focus)}
 .chips label{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:var(--pill);background:var(--field);border:2px solid transparent;font:16px/1 var(--text);color:var(--ink);cursor:pointer;margin:0;transition:border-color .15s,background-color .15s,color .15s}
 .chips input:focus-visible+label{outline:3px solid var(--focus);outline-offset:3px}
 .chips input:checked+label{background:var(--ink);color:#fff}
+/* a tapped service row or finish card lands here with its chip already picked: one copper ring says so */
+.chips label.picked{animation:picked .7s ease-out .35s}
+@keyframes picked{from{box-shadow:0 0 0 0 var(--copper)}to{box-shadow:0 0 0 12px rgba(227,154,95,0)}}
 .err{display:none;font-size:15px;color:var(--error)}
 .field.bad .err{display:block}
 .field.bad input[type=text],.field.bad textarea{border-color:var(--error)}
 form .btn-primary{width:100%}
 form .btn-primary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 .after{font-size:15px;color:var(--soft)}
-.sent{color:var(--ink);font-weight:600}
-.sent a{white-space:nowrap;display:inline-block;padding:11px 0;margin:-11px 0}
+.sent{display:grid;gap:12px;color:var(--ink)}
+.sent p{font-weight:600}
+.sent textarea{min-height:140px;background:var(--paper);font-size:15px}
+.sent-actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn-plain{background:var(--card);color:var(--ink);border-color:var(--line);min-height:48px;font-size:16px;padding:0 20px}
 @media (max-width:380px){.chips label{padding:0 14px}}
 
 /* ---------- Close ---------- */
@@ -183,13 +191,14 @@ form .btn-primary:focus-visible{outline:3px solid var(--focus);outline-offset:3p
 /* ---------- Footer ---------- */
 footer{background-color:var(--deep);background-image:var(--texture);color:var(--on-dark-soft);padding:48px 0 calc(96px + env(safe-area-inset-bottom));font-size:16px}
 footer .wrap{display:grid;gap:10px}
-footer b{font:400 20px/1.2 var(--display);color:var(--on-dark)}
 .nw{white-space:nowrap}
 footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--on-dark);text-decoration:none}
 
 /* ---------- Floating text circle (one circle, never a bottom bar) ---------- */
-.float{position:fixed;z-index:15;right:calc(16px + env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:var(--copper);color:var(--ink);box-shadow:0 10px 28px rgba(8,22,40,.32);transform:translateY(120px);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
-.float.on{transform:none}
+.float{position:fixed;z-index:15;right:calc(16px + env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:var(--copper);color:var(--ink);box-shadow:0 10px 28px rgba(8,22,40,.32);transform:translateY(120px);transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s linear .35s}
+.js .float.on{transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s}
+.float{visibility:hidden}
+.js .float.on{transform:none;visibility:visible}
 .float svg{width:26px;height:26px}
 .float:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:50%}
 
@@ -212,8 +221,12 @@ footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--on-d
   .actions{grid-auto-flow:column;justify-content:start;width:auto}
   .actions .btn{min-width:240px}
   .services{grid-template-columns:1fr 1fr}
+  .services li:last-child:nth-child(odd){grid-column:1/-1}
   .finishes{grid-template-columns:repeat(3,1fr)}
+  .finish{aspect-ratio:4/5}
 }
+/* landscape phones: keep the hero's buttons on the first screen */
+@media (min-width:760px) and (max-height:520px){.hero-copy{padding-top:44px;padding-bottom:52px}.hero h1{font-size:clamp(42px,7vw,60px)}}
 @media (min-width:1024px){
   .split{display:grid;grid-template-columns:1fr 1fr;column-gap:64px;align-items:start}
   .split .claims{margin-top:0}
@@ -233,7 +246,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--on-d
 input[type=text]:hover,textarea:hover{border-color:var(--focus)}
 .chips label:hover{border-color:var(--focus)}
 form .btn-primary:hover{outline:2px solid var(--focus);outline-offset:2px}
-.sent a:hover{color:var(--navy)}
+.btn-plain:hover{border-color:var(--focus)}
 .bigtel:hover{color:var(--copper)}
 footer a:hover{color:var(--copper)}
 }
@@ -242,6 +255,7 @@ footer a:hover{color:var(--copper)}
   .js .rise,.float,.btn,.arrow{transition:none}
   .js .rise.below{opacity:1;transform:none}
   .hero h1 .c{animation:none;opacity:1;transform:none}
+  .chips label.picked{animation:none}
 }
 </style>
 </head>
@@ -251,7 +265,7 @@ THESIS: An epoxy crew that wins trust by caring about the part nobody sees: the 
 OWN-WORLD: Off-white paper, logo-tile navy (#12304f) and deep navy (#0b1d31, faint diagonal lines) bands, copper from metallic epoxy veins as the one warm accent (fills only; #9a4a12 when it has to be text on light). Cal Sans display, system body at 16/1.7. Images are procedural renders of epoxy floors (tools/render-floors.html), never stock photos of other crews' jobs.
 STORY: The visitor sees a floor that shines, believes this crew will treat their garage carefully, picks a finish, and texts a photo for a free quote.
 FIRST VIEWPORT: Paper header with the dripping-G mark and wordmark left, tap-to-call number top right. Hero on a navy-washed metallic floor: eyebrow, "Your garage, finished like glass.", one promise line, two pill buttons (Get a free quote, Text us a photo).
-FORM: calm band system (lpmr.co.uk via DPG) with a photo-style hero; finish cards in the kit's work-card shape.
+FORM: house default calm-photo-style (Ellie 2026-10-19), no concept roll; photo-style hero from a generated render (phone gets its own portrait render with the lit floor below the buttons); finish cards in the kit's work-card shape.
 -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -269,7 +283,10 @@ FORM: calm band system (lpmr.co.uk via DPG) with a photo-style hero; finish card
 <main id="top">
 <section class="hero" id="hero" aria-labelledby="h1">
   <div class="hero-photo" aria-hidden="true">
-    <img src="img/hero-900.webp" srcset="img/hero-900.webp 900w, img/hero-1600.webp 1600w" sizes="100vw" alt="" width="1600" height="900" fetchpriority="high" decoding="async">
+    <picture>
+      <source media="(max-width:759px)" srcset="img/hero-phone.webp" width="900" height="1300">
+      <img src="img/hero-1600.webp" srcset="img/hero-900.webp 900w, img/hero-1600.webp 1600w, img/hero-2400.webp 2400w" sizes="100vw" alt="" width="1600" height="900" fetchpriority="high" decoding="async">
+    </picture>
   </div>
   <div class="wrap hero-copy">
     <span class="eyebrow">Epoxy floor coatings</span>
@@ -286,16 +303,15 @@ FORM: calm band system (lpmr.co.uk via DPG) with a photo-style hero; finish card
   <div class="wrap">
     <div class="head rise">
       <span class="eyebrow">What we coat</span>
-      <h2 id="h-svc">Bare concrete in, <span class="accent">a floor you'll show off out.</span></h2>
+      <h2 id="h-svc">From bare concrete <span class="accent">to a floor you'll show off.</span></h2>
     </div>
-    <nav class="services rise" aria-label="Floors we coat">
-      <a class="row" href="#quote" data-room="Garage">Garage floors<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a>
-      <a class="row" href="#quote" data-room="Basement">Basements<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a>
-      <a class="row" href="#quote" data-room="Workshop">Workshops<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a>
-      <a class="row" href="#quote" data-room="Commercial">Shops &amp; showrooms<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a>
-      <a class="row" href="#quote" data-room="Commercial">Commercial floors<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a>
-      <a class="row" href="#quote" data-room="Repair">Crack &amp; chip repair<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a>
-    </nav>
+    <ul class="services rise">
+      <li><a class="row" href="#quote" data-room="Garage">Garage floors<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
+      <li><a class="row" href="#quote" data-room="Basement">Basements<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
+      <li><a class="row" href="#quote" data-room="Workshop">Workshops<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
+      <li><a class="row" href="#quote" data-room="Commercial">Shops &amp; commercial floors<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
+      <li><a class="row" href="#quote" data-room="Repair">Crack &amp; chip repair<span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
+    </ul>
   </div>
 </section>
 
@@ -303,9 +319,9 @@ FORM: calm band system (lpmr.co.uk via DPG) with a photo-style hero; finish card
   <div class="wrap">
     <h2 id="h-finish" class="rise">Pick your finish.</h2>
     <div class="finishes">
-      <a class="finish rise" href="#quote" data-finish="Flake"><img src="img/flake.webp" alt="Grey flake epoxy floor with a glossy clear coat" width="640" height="800" loading="lazy" decoding="async"><span class="finish-meta"><h3>Flake</h3><span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></span></a>
-      <a class="finish rise" href="#quote" data-finish="Metallic"><img src="img/metallic.webp" alt="Copper and charcoal metallic epoxy floor with swirling veins" width="720" height="900" loading="lazy" decoding="async"><span class="finish-meta"><h3>Metallic</h3><span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></span></a>
-      <a class="finish rise" href="#quote" data-finish="Solid colour"><img src="img/solid.webp" alt="Smooth grey epoxy floor with a painted yellow safety line" width="720" height="900" loading="lazy" decoding="async"><span class="finish-meta"><h3>Solid colour</h3><span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></span></a>
+      <a class="finish rise" href="#quote" data-finish="Flake"><img src="img/flake.webp" srcset="img/flake.webp 640w, img/flake-900.webp 900w" sizes="(min-width:1160px) 340px, (min-width:760px) 30vw, calc(100vw - 40px)" alt="Grey flake epoxy floor with a glossy clear coat" width="640" height="800" loading="lazy" decoding="async"><div class="finish-meta"><h3>Flake</h3><span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></div></a>
+      <a class="finish rise" href="#quote" data-finish="Metallic"><img src="img/metallic.webp" srcset="img/metallic.webp 640w, img/metallic-1080.webp 1080w" sizes="(min-width:1160px) 340px, (min-width:760px) 30vw, calc(100vw - 40px)" alt="Copper and charcoal metallic epoxy floor with swirling veins" width="640" height="800" loading="lazy" decoding="async"><div class="finish-meta"><h3>Metallic</h3><span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></div></a>
+      <a class="finish rise" href="#quote" data-finish="Solid color"><img src="img/solid.webp" srcset="img/solid.webp 640w, img/solid-1080.webp 1080w" sizes="(min-width:1160px) 340px, (min-width:760px) 30vw, calc(100vw - 40px)" alt="Smooth grey epoxy floor with a painted yellow safety line" width="640" height="800" loading="lazy" decoding="async"><div class="finish-meta"><h3>Solid color</h3><span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></div></a>
     </div>
   </div>
 </section>
@@ -317,9 +333,9 @@ FORM: calm band system (lpmr.co.uk via DPG) with a photo-style hero; finish card
       <p class="lede" style="margin-top:16px">It holds your car, your tools and half your life. We move only what we have to, cover what stays, and put everything back where it was.</p>
     </div>
     <ul class="claims">
-      <li class="rise"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="5"/><path d="M20 6v4M20 30v4M6 20h4M30 20h4"/></svg>Ground smooth before we coat</li>
+      <li class="rise"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="3"/><rect x="18" y="8" width="4" height="5" rx="1"/><rect x="18" y="27" width="4" height="5" rx="1"/><rect x="8" y="18" width="5" height="4" rx="1"/><rect x="27" y="18" width="5" height="4" rx="1"/></svg>Ground smooth before we coat</li>
       <li class="rise"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 30h28"/><path d="M11 30l5-9 4 5 3-7 6 11"/></svg>Cracks and chips filled first</li>
-      <li class="rise"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 34V16l12-9 12 9v18z"/><path d="M15 34V23h10v11"/></svg>Your things covered and put back</li>
+      <li class="rise"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 33c1-6 1-14 3-19h16c2 5 2 13 3 19"/><path d="M6 33h28"/><path d="M12 14l3 5M28 14l-3 5M20 14v6"/></svg>Your things covered and put back</li>
       <li class="rise"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 5l-9 17"/><path d="M12 21l10 5-3 9H7z"/><path d="M12 35l2-6M16 35l1.5-4"/></svg>Swept clean before we leave</li>
     </ul>
   </div>
@@ -344,7 +360,7 @@ FORM: calm band system (lpmr.co.uk via DPG) with a photo-style hero; finish card
       <p class="lede">Not sure which finish? Leave it open and we'll help you choose.</p>
     </div>
     <form id="quoteForm" class="rise" novalidate>
-      <fieldset class="field" id="f-room">
+      <fieldset class="field" id="f-room" aria-describedby="e-room">
         <legend>Which floor?</legend>
         <div class="chips">
           <input type="radio" name="room" id="r1" value="Garage" aria-describedby="e-room"><label for="r1">Garage</label>
@@ -353,26 +369,26 @@ FORM: calm band system (lpmr.co.uk via DPG) with a photo-style hero; finish card
           <input type="radio" name="room" id="r4" value="Commercial"><label for="r4">Shop or business</label>
           <input type="radio" name="room" id="r5" value="Repair"><label for="r5">Repair only</label>
         </div>
-        <p class="err" id="e-room">Pick the floor you'd like done.</p>
+        <p class="err" aria-live="polite" id="e-room">Pick the floor you'd like done.</p>
       </fieldset>
       <fieldset class="field">
         <legend>Finish <small>(optional)</small></legend>
         <div class="chips">
           <input type="radio" name="finish" id="x1" value="Flake"><label for="x1">Flake</label>
           <input type="radio" name="finish" id="x2" value="Metallic"><label for="x2">Metallic</label>
-          <input type="radio" name="finish" id="x3" value="Solid colour"><label for="x3">Solid colour</label>
+          <input type="radio" name="finish" id="x3" value="Solid color"><label for="x3">Solid color</label>
           <input type="radio" name="finish" id="x4" value="Not sure yet"><label for="x4">Not sure yet</label>
         </div>
       </fieldset>
       <div class="field" id="f-name">
         <label for="name">Your name</label>
         <input type="text" id="name" name="name" autocomplete="name" maxlength="60" placeholder="First name is fine" aria-describedby="e-name">
-        <p class="err" id="e-name">Add your name so we know who's texting.</p>
+        <p class="err" aria-live="polite" id="e-name">Add your name so we know who's texting.</p>
       </div>
       <div class="field" id="f-town">
         <label for="town">Your town</label>
         <input type="text" id="town" name="town" autocomplete="address-level2" maxlength="60" aria-describedby="e-town">
-        <p class="err" id="e-town">Add your town so we can check we cover it.</p>
+        <p class="err" aria-live="polite" id="e-town">Add your town so we can check we cover it.</p>
       </div>
       <div class="field">
         <label for="size">How big is it? <small>(optional)</small></label>
@@ -383,7 +399,11 @@ FORM: calm band system (lpmr.co.uk via DPG) with a photo-style hero; finish card
         <textarea id="notes" name="notes" maxlength="600" placeholder="Oil stains, old paint, a drain, a deadline…"></textarea>
       </div>
       <button class="btn btn-primary" type="submit"><svg aria-hidden="true"><use href="#i-chat"/></svg>Text this to us</button>
-      <p class="sent" id="sent" role="status" hidden>Didn't open your messages? Call us at <a href="tel:+15550100000">(555) 010-0000</a>.</p>
+      <div class="sent" id="sent" role="status" hidden>
+        <p>Didn't open your messages? Copy this and text it to <span class="nw">(555) 010-0000</span>, or call us.</p>
+        <textarea id="ready" readonly aria-label="Your message"></textarea>
+        <div class="sent-actions"><button class="btn btn-plain" type="button" id="copyMsg">Copy message</button><a class="btn btn-plain" id="openMsg" href="#">Open in Messages</a></div>
+      </div>
       <p class="after">Opens your messages with this written out. Add a photo before you send.</p>
     </form>
   </div>
@@ -403,8 +423,7 @@ FORM: calm band system (lpmr.co.uk via DPG) with a photo-style hero; finish card
 
 <footer>
   <div class="wrap">
-    <b>Gorbachev Pourworks</b>
-    <span>Epoxy flooring · <span class="nw">(555) 010-0000</span></span>
+    <span>Gorbachev Pourworks · Epoxy flooring</span>
     <a href="mailto:hello@example.com">hello@example.com</a>
   </div>
 </footer>
@@ -449,8 +468,9 @@ document.documentElement.classList.add('js');
   document.addEventListener('click',function(e){
     var a=e.target.closest('[data-room],[data-finish]');if(!a)return;
     var room=a.getAttribute('data-room'),fin=a.getAttribute('data-finish');
-    if(room){var r=document.querySelector('input[name=room][value="'+room+'"]');if(r)r.checked=true;document.getElementById('f-room').classList.remove('bad')}
-    if(fin){var f=document.querySelector('input[name=finish][value="'+fin+'"]');if(f)f.checked=true}
+    function pick(inp){if(!inp)return;inp.checked=true;var l=inp.nextElementSibling;l.classList.remove('picked');void l.offsetWidth;l.classList.add('picked')}
+    if(room){pick(document.querySelector('input[name=room][value="'+room+'"]'));document.getElementById('f-room').classList.remove('bad')}
+    if(fin)pick(document.querySelector('input[name=finish][value="'+fin+'"]'));
   });
 })();
 
@@ -475,9 +495,21 @@ document.documentElement.classList.add('js');
     if(size)msg+='\nSize: '+size;
     if(notes)msg+='\n'+notes;
     msg+='\nI\'ll attach a photo.';
-    location.href='sms:'+CONFIG.SMS+'?&body='+encodeURIComponent(msg);
-    // if no messages app opened (desktop, some in-app browsers), say what to do instead
+    var href='sms:'+CONFIG.SMS+'?&body='+encodeURIComponent(msg);
+    document.getElementById('ready').value=msg;document.getElementById('openMsg').href=href;
+    location.href=href;
+    // if no messages app opened (desktop, some in-app browsers), keep the message so it can be copied
     setTimeout(function(){document.getElementById('sent').hidden=false},900);
+  });
+})();
+
+/* ===== Copy the composed message (clipboard can be blocked in Facebook's browser, so fall back to selecting it) ===== */
+(function(){
+  var b=document.getElementById('copyMsg'),t=document.getElementById('ready');if(!b)return;
+  b.addEventListener('click',function(){
+    function done(){b.textContent='Copied'}
+    function pick(){t.focus();t.select();try{document.execCommand('copy')&&done()}catch(e){}}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t.value).then(done,pick);else pick();
   });
 })();
 

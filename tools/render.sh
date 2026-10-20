@@ -12,5 +12,5 @@ one() { # mode w h
   ffmpeg -loglevel error -y -i "src-assets/gen/.$1.png" -vf "crop=$2:$3:0:0" "src-assets/gen/$1.png"
   rm "src-assets/gen/.$1.png"
 }
-one hero 2400 1350 & one metallic 960 1200 & one flake 960 1200 & one solid 960 1200 & wait
+one hero 2400 1350 & one heroPhone 900 1300 & one metallic 1080 1350 & one flake 1080 1350 & one solid 1080 1350 & wait
 ls -1 src-assets/gen
