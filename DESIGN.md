@@ -158,7 +158,7 @@ components:
 
 A garage floor, freshly coated, seen under a navy evening: a pale, clean paper ground, two navies taken from the logo tile, and a single copper that comes from the veins of a metallic epoxy pour. The page reads as calm, full-bleed bands that alternate light and dark, so every new section announces itself by its ground rather than by rules or ornaments. Shapes are soft and borderless; type is one friendly display face over a plain system body.
 
-Density is low and phone-first. Each band carries one heading, one short supporting idea, and one kind of thing to tap. Imagery: the hero is a procedural render from `tools/render-floors.html` (re-rendered with `tools/render.sh`); the finish slideshows use AI-generated wide shots (OpenAI gpt-image-1 and local Z-Image Turbo, 2026-10-20): whole rooms, landscape, 1536–1920px wide, because close-ups look absurdly zoomed when full-screen. The hero gets two renders, a portrait one for phones with the lit floor sitting under the buttons and a wide one for desktop.
+Density is low and phone-first. Each band carries one heading, one short supporting idea, and one kind of thing to tap. Imagery: the hero is a generated garage photo with a generated crew member (OpenAI gpt-image-1); the finish slideshows use AI-generated wide shots (OpenAI gpt-image-1 and local Z-Image Turbo, 2026-10-20): whole rooms, landscape, 1536–1920px wide, because close-ups look absurdly zoomed when full-screen.
 
 Motion is sparse and gated: the hero H1 bounces in letter by letter once, content below the first screen rises 12px as it arrives, and a chip pulses one copper ring when a tap elsewhere pre-selected it. Everything is visible at rest, without JS, and under reduced motion.
 
@@ -180,7 +180,7 @@ Paper and two navies carry the page; copper is the single warm voice, poured in 
 
 ### Secondary
 - **Logo-Tile Navy** (`navy`): the services band and the closing band; also the placeholder fill behind finish photos and the logo tile itself.
-- **Deep Pour Navy** (`deep`): the "how it works" band, the footer, and the hero ground under the render. Always paired with the line texture when it is a band.
+- **Deep Pour Navy** (`deep`): the "how it works" band, the footer, and the hero ground under the garage photo. Always paired with the line texture when it is a band.
 
 ### Neutral
 - **Paper** (`paper`): page ground, light bands, the read-only message box.
@@ -238,7 +238,7 @@ Internal rhythm: 10px between stacked rows and chips, 16px between heading parts
 
 ## Elevation & Depth
 
-Flat. Depth comes from tonal layering: band against band, white card on paper, field tint inside the card, translucent white (6-16%) panels on navy. The hero gets depth from its render under a navy gradient wash (vertical on phones, a left-to-right wash plus a vertical one on desktop) so white type always sits on dark.
+Flat. Depth comes from tonal layering: band against band, white card on paper, field tint inside the card, translucent white (6-16%) panels on navy. The hero's garage photo sits under a navy fade that is dark at the top for the headline and clear over the floor (desktop adds a left-side wash behind the copy).
 
 ### Shadow Vocabulary
 - **Float lift** (`box-shadow: 0 10px 28px rgba(8,22,40,.32)`): the floating text circle only, because it is the one element that sits above the page.
@@ -269,6 +269,12 @@ Full pills, confident, never more than two side by side.
 
 ### Cards / Containers
 - **Form card:** 24px radius, white, padding clamp(20px, 5vw, 32px), max 600px, 22px between fields, no border, no shadow.
+- **Hero scene:**
+  - **Layers:** a full-screen garage photo (`object-position: 50% 60%`), with a canvas over it that shows bare concrete only where the visitor has rubbed. The canvas uses a half-resolution mask clipped to the floor polygon.
+  - **The crew member:** a DOM layer under the navy fade. He paces a lane slowly with the roller: on the right on desktop, centred and at 74% size on phones. Once a rub has paused for 350 ms, he runs to the nearest wiped spot and rolls it back point by point.
+  - **Motion limits:** the loop runs only while the hero is on screen. Under reduced motion he stands still, and wiped spots fade back after 0.9 s.
+  - **Hint:** a "Rub the floor" pill sits bottom centre and fades on the first rub.
+  - **Phones:** `touch-action: pan-y` keeps vertical page scrolling working, so only sideways drags rub.
 - **Finish band:** the "Pick your finish." section is one full-screen band (`min-height:100svh`). The selected finish's photos fill it as a horizontal scroll-snap slideshow behind a navy gradient (dark at the top for the heading, clear through the middle, dark at the bottom for the dots). It auto-advances every 5 s while on screen, pausing on hover/focus, for 10 s after any manual move, and entirely under reduced motion. Top left: the H2, a segmented pill control (Flake / Metallic / Solid color; selected = copper fill, ink text; the group sits on 60% navy with a blur). Round 48px navy arrows mid-left and mid-right; dots bottom centre (current dot stretches to a 26px pill). No JS: the first flake photo and the heading.
 
 ### Inputs / Fields
@@ -311,7 +317,7 @@ One 60px copper circle, bottom right inside the safe area, chat icon in Ink, the
 - **Do** set every heading, label, button and phone number in Cal Sans at 400, and every explanation in the system stack at 16px/1.7.
 - **Do** keep tap targets at 44px or more (buttons 56px, chips 48px, arrows 44px, footer links 44px).
 - **Do** put hover styles inside `@media (hover:hover)` and give form controls a Signal Blue outline on hover and focus.
-- **Do** fill full-screen bands with wide, landscape shots of the whole room (1600px+), never close-ups; procedural renders of finishes looked fake. The hero stays a render, with a separate portrait render for phones.
+- **Do** fill full-screen bands with wide, landscape shots of the whole room (1600px+), never close-ups; procedural renders of finishes looked fake. The hero is one landscape garage photo cropped by `object-fit: cover` on every screen.
 - **Do** keep everything visible at rest, without JS and under reduced motion.
 
 ### Don't:
