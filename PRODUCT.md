@@ -22,7 +22,7 @@ A careful, prep-first epoxy crew: the floor looks like poured glass because the 
 
 ## Constraints
 - No real email, area, hours, years, licence, prices or reviews. Never state any of those as fact.
-- No confirmed client photos. The hero is a procedural render; the three finish cards use photos Ellie supplied (2026-10-20, licence to confirm), shown as finish types, not as the client's jobs.
+- No client photos. The hero is a procedural render; the finish slideshows use AI-generated wide shots (2026-10-20), shown as examples of each finish, never as the client's jobs.
 - No Facebook or other social links exist yet.
 
 ## Brand commitments
@@ -36,4 +36,4 @@ A careful, prep-first epoxy crew: the floor looks like poured glass because the 
 ## Principles
 - Look like a real business's real site, not a sample.
 - Phone first: the first phone screen says what, for whom, and how to ask.
-- Honest: finish photos are shown as finishes to choose from, never as "our jobs" unless the owner confirms they are.
+- Honest: generated finish photos are shown as finishes to choose from, never as "our jobs".

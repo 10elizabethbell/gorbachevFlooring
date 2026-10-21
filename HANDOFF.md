@@ -11,16 +11,15 @@
 - **Link preview:** `og.jpg` (1200x630) with the logo, the name and the headline.
 
 ## Images
-The hero, link card and logo are procedural renders I made for this site in `tools/render-floors.html` (re-render with `tools/render.sh`); the licence is ours to give. The three "Pick your finish" cards are **photos Ellie supplied on 2026-10-20**, which replaced my renders because those looked fake. Their source and licence aren't recorded: **confirm before handing the site over** (originals kept in `src-assets/ellie/`, not committed).
+The hero, link card and logo are procedural renders I made for this site in `tools/render-floors.html` (re-render with `tools/render.sh`); the licence is ours to give. The "Pick your finish" slideshows use **nine generated wide shots** (2026-10-20). Ellie's supplied close-ups (source and licence unrecorded, originals in `src-assets/ellie/`) were removed because they looked far too zoomed in full-screen.
 
 | File | What it is | Source | Licence |
 |---|---|---|---|
 | `img/hero-900/1600/2400.webp` | navy and copper metallic epoxy, looking across the floor (desktop) | generated, `tools/render-floors.html#hero` | original work for this site, no third-party rights |
 | `img/hero-phone.webp` | same floor, portrait, window light low in the frame (phones) | generated, `#heroPhone` | same |
-| `img/flake-photo.webp` | grey/black/white/blue flake floor in a workshop | photo supplied by Ellie, 2026-10-20 | **unknown, to confirm** |
-| `img/metallic-photo.webp` | copper-brown metallic floor, ceiling lights reflected | photo supplied by Ellie, 2026-10-20 | **unknown, to confirm** |
-| `img/solid-photo.webp` | glossy light grey solid-colour floor | photo supplied by Ellie, 2026-10-20 | **unknown, to confirm** |
-| `img/flake-gen-1.webp` | grey/black/white flake garage floor, workbench at the back | **generated** with OpenAI gpt-image-1, 2026-10-20 (prompt in `~/.local/share/genimg/log.jsonl`); Ellie picked it | generated; OpenAI's terms assign the output to the user. Shown as an example of the finish, not as the client's job |
+| `img/flake-1/2/3.webp` | wide shots of garages with flake epoxy floors (grey, grey, tan) | **generated** 2026-10-20: `-1` OpenAI gpt-image-1, `-2`/`-3` Z-Image Turbo run locally (mflux). Prompts in `~/.local/share/genimg/log.jsonl` and `src-assets/gen/band/prompts.tsv` | generated; OpenAI's terms assign output to the user, Z-Image Turbo is Apache-2.0. Shown as examples of the finish, not as the client's jobs |
+| `img/metallic-1/2/3.webp` | basement lounges and a garage with metallic epoxy floors (copper-brown, copper/charcoal, silver) | same | same |
+| `img/solid-1/2/3.webp` | garages and a workshop with solid-colour epoxy floors (light grey, grey with a yellow line, charcoal) | same | same |
 | `og.jpg`, `favicon.svg`, `apple-touch-icon.png` | link card and logo | made from the hero render + the drawn logo (`tools/og.html`) | original work for this site |
 
 **Looked for and rejected (so nobody re-checks them):**
@@ -50,7 +49,7 @@ The hero, link card and logo are procedural renders I made for this site in `too
 - **Service area, hours, years, licence/insurance, prices, reviews:** unknown, and none are stated anywhere. The closing band says "Tell us your town and we'll tell you straight away if we cover it."
 - **Real job photos:** none confirmed as the client's. The finish cards show finish types (Ellie's photos), not "our work"; if they turn out to be the client's own jobs, say so. Swap in real jobs as soon as there are some (one hero, then a work band of 3–6).
 
-- **Slideshow photos:** Flake has 2, Metallic and Solid color have 1 each (arrows and dots hide with one photo). Add more to `GALLERY` near the top of the script in `index.html`. The supplied metallic and solid photos are only ~800–1000px wide, so they look **soft when full-screen on desktop**; full-bleed photos want 1600px+ wide. Generated photos (see the image-gen skill) or the owner's own will fix it.
+- **Slideshow photos:** three generated wide shots per finish (add more in `GALLERY` near the top of the script). Swap in the owner's real jobs as soon as there are some: wide, landscape, 1600px+ wide, the whole floor in frame.
 
 ## Questions for the owner
 1. Which name do you like, and is it OK to use it on a public site?

@@ -158,7 +158,7 @@ components:
 
 A garage floor, freshly coated, seen under a navy evening: a pale, clean paper ground, two navies taken from the logo tile, and a single copper that comes from the veins of a metallic epoxy pour. The page reads as calm, full-bleed bands that alternate light and dark, so every new section announces itself by its ground rather than by rules or ornaments. Shapes are soft and borderless; type is one friendly display face over a plain system body.
 
-Density is low and phone-first. Each band carries one heading, one short supporting idea, and one kind of thing to tap. Imagery: the hero is a procedural render from `tools/render-floors.html` (re-rendered with `tools/render.sh`); the three finish cards are real photos Ellie supplied (2026-10-20), because the rendered finishes read as fake. The hero gets two renders, a portrait one for phones with the lit floor sitting under the buttons and a wide one for desktop.
+Density is low and phone-first. Each band carries one heading, one short supporting idea, and one kind of thing to tap. Imagery: the hero is a procedural render from `tools/render-floors.html` (re-rendered with `tools/render.sh`); the finish slideshows use AI-generated wide shots (OpenAI gpt-image-1 and local Z-Image Turbo, 2026-10-20): whole rooms, landscape, 1536–1920px wide, because close-ups look absurdly zoomed when full-screen. The hero gets two renders, a portrait one for phones with the lit floor sitting under the buttons and a wide one for desktop.
 
 Motion is sparse and gated: the hero H1 bounces in letter by letter once, content below the first screen rises 12px as it arrives, and a chip pulses one copper ring when a tap elsewhere pre-selected it. Everything is visible at rest, without JS, and under reduced motion.
 
@@ -311,7 +311,7 @@ One 60px copper circle, bottom right inside the safe area, chat icon in Ink, the
 - **Do** set every heading, label, button and phone number in Cal Sans at 400, and every explanation in the system stack at 16px/1.7.
 - **Do** keep tap targets at 44px or more (buttons 56px, chips 48px, arrows 44px, footer links 44px).
 - **Do** put hover styles inside `@media (hover:hover)` and give form controls a Signal Blue outline on hover and focus.
-- **Do** use real photos for the finish cards (renders of flake/metallic/solid looked fake); the hero stays a render, with a separate portrait render for phones.
+- **Do** fill full-screen bands with wide, landscape shots of the whole room (1600px+), never close-ups; procedural renders of finishes looked fake. The hero stays a render, with a separate portrait render for phones.
 - **Do** keep everything visible at rest, without JS and under reduced motion.
 
 ### Don't:

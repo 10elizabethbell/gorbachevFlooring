@@ -333,7 +333,7 @@ FORM: house default calm-photo-style (Ellie 2026-10-19), no concept roll; photo-
 </section>
 
 <section class="fin" id="finish" aria-labelledby="h-finish">
-  <div class="fin-track" id="fin-track" aria-label="Finish photos"><figure><img src="img/flake-photo.webp" alt="Grey, black, white and blue flake epoxy floor in a workshop" width="838" height="1116" loading="lazy" decoding="async"></figure></div>
+  <div class="fin-track" id="fin-track" aria-label="Finish photos"><figure><img src="img/flake-1.webp" alt="Two-car garage with a glossy grey flake epoxy floor, wall cabinets and two bikes" width="1536" height="1024" loading="lazy" decoding="async"></figure></div>
   <div class="wrap fin-copy">
     <h2 id="h-finish">Pick your finish.</h2>
     <div class="pills" role="group" aria-label="Finish" hidden>
@@ -460,15 +460,21 @@ var CONFIG = {
 
 /* Finish slideshows: photos per finish, in order (files in img/; pos = object-position for the crop) */
 var GALLERY = {
+  // all generated wide shots (2026-10-20): -1 OpenAI gpt-image-1, -2 and -3 Z-Image Turbo (local)
   'Flake': [
-    {src:'img/flake-photo.webp', alt:'Grey, black, white and blue flake epoxy floor in a workshop', w:838, h:1116},
-    {src:'img/flake-gen-1.webp', alt:'Grey, black and white flake epoxy garage floor with a glossy clear coat and a wooden workbench', w:1024, h:1536} // generated (gpt-image-1)
+    {src:'img/flake-1.webp', alt:'Two-car garage with a glossy grey flake epoxy floor, wall cabinets and two bikes', w:1536, h:1024},
+    {src:'img/flake-2.webp', alt:'Wide garage with a grey flake epoxy floor that runs up the base of the walls, bikes along the side', w:1920, h:1088},
+    {src:'img/flake-3.webp', alt:'Three-car garage with a glossy tan flake epoxy floor reflecting the overhead lights', w:1920, h:1088}
   ],
   'Metallic': [
-    {src:'img/metallic-photo.webp', alt:'Copper-brown metallic epoxy floor with swirls, ceiling lights reflected in the gloss', w:1008, h:1138}
+    {src:'img/metallic-1.webp', alt:'Finished basement with a deep copper-brown metallic epoxy floor reflecting the ceiling lights', w:1536, h:1024},
+    {src:'img/metallic-2.webp', alt:'Basement lounge with a copper and charcoal swirled metallic epoxy floor', w:1920, h:1088},
+    {src:'img/metallic-3.webp', alt:'Garage with a silver and grey marbled metallic epoxy floor', w:1920, h:1088}
   ],
   'Solid color': [
-    {src:'img/solid-photo.webp', alt:'Glossy light grey solid-color epoxy floor reflecting the windows', w:814, h:624, pos:'72% 50%'}
+    {src:'img/solid-1.webp', alt:'Empty garage with a glossy light grey solid-color epoxy floor and black cabinets', w:1536, h:1024},
+    {src:'img/solid-2.webp', alt:'Garage with a light grey solid-color epoxy floor edged with a yellow safety line', w:1920, h:1088},
+    {src:'img/solid-3.webp', alt:'Workshop with a charcoal solid-color epoxy floor under large windows', w:1920, h:1088}
   ]
 };
 document.documentElement.classList.add('js');
