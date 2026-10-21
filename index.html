@@ -129,41 +129,28 @@ section{padding:64px 0}
 .row:focus-visible .arrow{background:var(--copper);color:var(--ink);outline:3px solid var(--copper);outline-offset:3px}
 
 /* ---------- Finishes ---------- */
-.finishes{display:grid;gap:16px;margin-top:32px}
-.finish{position:relative;display:block;overflow:hidden;border-radius:var(--r-card);aspect-ratio:4/3;text-decoration:none;color:#fff;background:var(--navy)}
-.finish img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.finish img[src*="solid"]{object-position:72% 50%}
-.finish::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(180deg,transparent,rgba(11,29,49,.88))}
-.finish-meta{position:absolute;inset:auto 18px 18px 22px;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
-.finish h3{color:#fff;font-size:26px}
-.finish .arrow{background:rgba(255,255,255,.16);color:#fff}
-.finish:focus-visible{outline:none}
-.finish:focus-visible .arrow{background:var(--copper);color:var(--ink);outline:3px solid var(--focus);outline-offset:3px}
-
-/* ---------- Finish gallery: a finish card opens it, its button books the quote ---------- */
-/* phones: full screen; desktop: a framed panel (see the 760px rule below) */
-.gal{width:100%;max-width:none;height:100%;max-height:none;margin:0;padding:0;border:0;background:var(--deep);color:var(--on-dark);overflow:hidden}
-.gal[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto}
-.gal::backdrop{background:rgba(11,29,49,.8)}
-html.gal-open{overflow:hidden}
-.gal :focus-visible{outline-color:var(--copper)}
-.gal-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:max(12px,env(safe-area-inset-top)) var(--gutter) 12px}
-.gal-head h2{color:#fff;font-size:30px}
-.gal-count{font:500 14px/1 var(--text);color:var(--on-dark-soft);margin-top:8px}
-.gal-x,.gal-nav{width:48px;height:48px;flex:none;border:0;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}
-.gal-x svg,.gal-nav svg{width:22px;height:22px}
-.gal-stage{position:relative;min-height:0}
-.gal-track{display:flex;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
-.gal-track::-webkit-scrollbar{display:none}
-.gal-track figure{flex:0 0 100%;height:100%;margin:0;padding:0 var(--gutter);scroll-snap-align:center;scroll-snap-stop:always}
-.gal-track img{width:100%;height:100%;object-fit:contain}
-.gal-nav{position:absolute;top:50%;margin-top:-24px;background:rgba(11,29,49,.72)}
-.gal-nav.prev{left:12px}.gal-nav.prev svg{transform:scaleX(-1)}
-.gal-nav.next{right:12px}
-.gal-nav:disabled{opacity:0;pointer-events:none}
-.gal-foot{display:flex;justify-content:center;padding:16px var(--gutter) max(16px,env(safe-area-inset-bottom))}
-.gal-foot .btn{width:100%;max-width:420px}
-@media (min-width:760px){.gal{width:min(1040px,calc(100% - 64px));height:min(860px,calc(100% - 64px));margin:auto;border-radius:var(--r-card)}.gal-head{padding:20px 28px 12px}.gal-nav{background:rgba(255,255,255,.14)}.gal-nav.prev{left:20px}.gal-nav.next{right:20px}.gal-track figure{padding:0 84px}}
+.fin{position:relative;min-height:100vh;min-height:100svh;padding:0;display:grid;background:var(--deep);color:var(--on-dark);overflow:hidden;isolation:isolate}
+/* the slideshow is a native scroll-snap track, so phones can swipe it; it sits behind everything */
+.fin-track{position:absolute;inset:0;z-index:-2;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
+.fin-track::-webkit-scrollbar{display:none}
+.fin-track figure{flex:0 0 100%;margin:0;scroll-snap-align:start;scroll-snap-stop:always}
+.fin-track img{width:100%;height:100%;object-fit:cover}
+.fin::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(11,29,49,.84) 0%,rgba(11,29,49,.5) 34%,rgba(11,29,49,.12) 58%,rgba(11,29,49,.62) 100%)}
+.fin-copy{position:relative;z-index:1;align-self:start;display:grid;gap:20px;justify-items:start;padding-top:64px;padding-bottom:120px;pointer-events:none}
+.fin-copy>*{pointer-events:auto}
+.fin h2{color:#fff}
+.pills{display:flex;flex-wrap:wrap;gap:4px;padding:5px;border-radius:var(--pill);background:rgba(11,29,49,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.pill{min-height:44px;padding:0 16px;border:0;border-radius:var(--pill);background:transparent;color:var(--on-dark);font:400 17px/1 var(--display);cursor:pointer;transition:background-color .2s,color .2s}
+.pill[aria-pressed="true"]{background:var(--copper);color:var(--ink)}
+.fin-nav{position:absolute;top:50%;z-index:2;margin-top:-24px;width:48px;height:48px;border:0;border-radius:50%;display:grid;place-items:center;background:rgba(11,29,49,.6);color:#fff;cursor:pointer;transition:background-color .2s,color .2s}
+.fin-nav svg{width:22px;height:22px}
+.fin-nav.prev{left:12px}.fin-nav.prev svg{transform:scaleX(-1)}
+.fin-nav.next{right:12px}
+.fin-dots{position:absolute;left:0;right:0;bottom:max(24px,env(safe-area-inset-bottom));z-index:2;display:flex;justify-content:center;gap:2px}
+.fin-dots button{width:32px;height:32px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+.fin-dots button::before{content:"";width:9px;height:9px;border-radius:var(--pill);background:rgba(244,247,251,.55);transition:width .25s,background-color .25s}
+.fin-dots button[aria-current="true"]::before{width:26px;background:#fff}
+.fin :focus-visible{outline-color:var(--copper)}
 
 /* ---------- Care ---------- */
 .claims{list-style:none;margin:28px 0 0;padding:0;display:grid}
@@ -195,7 +182,7 @@ input[type=text]:focus,textarea:focus{outline:none;border-color:var(--focus)}
 .chips label{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:var(--pill);background:var(--field);border:2px solid transparent;font:16px/1 var(--text);color:var(--ink);cursor:pointer;margin:0;transition:border-color .15s,background-color .15s,color .15s}
 .chips input:focus-visible+label{outline:3px solid var(--focus);outline-offset:3px}
 .chips input:checked+label{background:var(--ink);color:#fff}
-/* a tapped service row or finish card lands here with its chip already picked: one copper ring says so */
+/* a tapped service row or finish quote button lands here with its chip already picked: one copper ring says so */
 .chips label.picked{animation:picked .7s ease-out .35s}
 @keyframes picked{from{box-shadow:0 0 0 0 var(--copper)}to{box-shadow:0 0 0 12px rgba(227,154,95,0)}}
 .err{display:none;font-size:15px;color:var(--error)}
@@ -251,8 +238,8 @@ footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--on-d
   .actions .btn{min-width:240px}
   .services{grid-template-columns:1fr 1fr}
   .services li:last-child:nth-child(odd){grid-column:1/-1}
-  .finishes{grid-template-columns:repeat(3,1fr)}
-  .finish{aspect-ratio:4/5}
+  .fin-copy{padding-top:112px}
+  .fin-nav.prev{left:24px}.fin-nav.next{right:24px}
 }
 /* landscape phones: keep the hero's buttons on the first screen */
 @media (min-width:760px) and (max-height:520px){.hero-copy{padding-top:80px;padding-bottom:20px;gap:14px}.hero h1{font-size:clamp(30px,6vw,48px)}}
@@ -270,8 +257,10 @@ footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--on-d
 @media (hover:hover){
 .tel:hover{color:var(--copper-2)}
 .btn-primary:hover{background:var(--copper-2);border-color:var(--copper-2)}
-.row:hover .arrow,.finish:hover .arrow{background:var(--copper);color:var(--ink)}
-.gal-x:hover,.gal-nav:hover{background:var(--copper);color:var(--ink)}
+.row:hover .arrow{background:var(--copper);color:var(--ink)}
+.fin-nav:hover{background:var(--copper);color:var(--ink)}
+.pill:hover:not([aria-pressed="true"]){background:rgba(255,255,255,.14)}
+.fin-dots button:hover::before{background:#fff}
 input[type=text]:hover,textarea:hover{border-color:var(--focus)}
 .chips label:hover{border-color:var(--focus)}
 form .btn-primary:hover{outline:2px solid var(--focus);outline-offset:2px}
@@ -281,7 +270,7 @@ footer a:hover{color:var(--copper)}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .js .rise,.float,.btn,.arrow,.gal-x,.gal-nav{transition:none}
+  .js .rise,.float,.btn,.arrow,.fin-nav,.pill,.fin-dots button::before{transition:none}
   .js .rise.below{opacity:1;transform:none}
   .hero h1 .c{animation:none;opacity:1;transform:none}
   .chips label.picked{animation:none}
@@ -297,7 +286,6 @@ FIRST VIEWPORT: Full-height hero; a transparent header sits on it with the dripp
 FORM: house default calm-photo-style (Ellie 2026-10-19), no concept roll; photo-style hero from a generated render (phone gets its own portrait render with the lit floor below the buttons); finish cards in the kit's work-card shape.
 -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3h3.5l1.8 4.6-2.3 1.5a11 11 0 0 0 6 6l1.5-2.3L20 14.5V18a2 2 0 0 1-2.2 2A16 16 0 0 1 3 5.2 2 2 0 0 1 5 3z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -344,18 +332,23 @@ FORM: house default calm-photo-style (Ellie 2026-10-19), no concept roll; photo-
   </div>
 </section>
 
-<section class="on-paper" aria-labelledby="h-finish">
-  <div class="wrap">
-    <h2 id="h-finish" class="rise">Pick your finish.</h2>
-    <div class="finishes">
-      <a class="finish rise" href="#quote" data-gallery="Flake" aria-haspopup="dialog"><img src="img/flake-photo.webp" alt="Grey, black, white and blue flake epoxy floor in a workshop" width="838" height="1116" loading="lazy" decoding="async"><div class="finish-meta"><h3>Flake</h3><span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></div></a>
-      <a class="finish rise" href="#quote" data-gallery="Metallic" aria-haspopup="dialog"><img src="img/metallic-photo.webp" alt="Copper-brown metallic epoxy floor with swirls, ceiling lights reflected in the gloss" width="1008" height="1138" loading="lazy" decoding="async"><div class="finish-meta"><h3>Metallic</h3><span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></div></a>
-      <a class="finish rise" href="#quote" data-gallery="Solid color" aria-haspopup="dialog"><img src="img/solid-photo.webp" alt="Glossy light grey solid-color epoxy floor reflecting the windows" width="814" height="624" loading="lazy" decoding="async"><div class="finish-meta"><h3>Solid color</h3><span class="arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></div></a>
+<section class="fin" id="finish" aria-labelledby="h-finish">
+  <div class="fin-track" id="fin-track" aria-label="Finish photos"><figure><img src="img/flake-photo.webp" alt="Grey, black, white and blue flake epoxy floor in a workshop" width="838" height="1116" loading="lazy" decoding="async"></figure></div>
+  <div class="wrap fin-copy">
+    <h2 id="h-finish">Pick your finish.</h2>
+    <div class="pills" role="group" aria-label="Finish" hidden>
+      <button class="pill" type="button" data-pick="Flake" aria-pressed="true">Flake</button>
+      <button class="pill" type="button" data-pick="Metallic" aria-pressed="false">Metallic</button>
+      <button class="pill" type="button" data-pick="Solid color" aria-pressed="false">Solid color</button>
     </div>
+    <a class="btn btn-primary" id="fin-quote" href="#quote">Get a free quote</a>
   </div>
+  <button class="fin-nav prev" type="button" aria-label="Previous photo" hidden><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+  <button class="fin-nav next" type="button" aria-label="Next photo" hidden><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+  <div class="fin-dots" id="fin-dots" hidden></div>
 </section>
 
-<section class="on-paper" aria-labelledby="h-care" style="padding-top:0">
+<section class="on-paper" aria-labelledby="h-care">
   <div class="wrap split">
     <div class="rise">
       <h2 id="h-care">We treat your garage like it's ours.</h2>
@@ -456,19 +449,6 @@ FORM: house default calm-photo-style (Ellie 2026-10-19), no concept roll; photo-
   </div>
 </footer>
 
-<dialog class="gal" id="gallery" aria-labelledby="gal-title">
-  <div class="gal-head">
-    <div><h2 id="gal-title">Flake</h2><p class="gal-count" id="gal-count" aria-live="polite"></p></div>
-    <button class="gal-x" type="button" id="gal-close" aria-label="Close the gallery"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
-  </div>
-  <div class="gal-stage">
-    <div class="gal-track" id="gal-track" tabindex="0" aria-label="Photos"></div>
-    <button class="gal-nav prev" type="button" id="gal-prev" aria-label="Previous photo"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-    <button class="gal-nav next" type="button" id="gal-next" aria-label="Next photo"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-  </div>
-  <div class="gal-foot"><a class="btn btn-primary" id="gal-quote" href="#quote" data-finish="Flake">Get a quote for flake</a></div>
-</dialog>
-
 <a class="float" id="float" data-sms href="sms:+17326446757?&amp;body=Hi%20Gorbachev%20Pourworks%2C%20I%20found%20your%20website.%20Here%27s%20a%20photo%20of%20my%20floor%3A%20" aria-label="Text us a photo"><svg aria-hidden="true"><use href="#i-chat"/></svg></a>
 
 <script>
@@ -479,16 +459,17 @@ var CONFIG = {
   NAME: 'Gorbachev Pourworks'
 };
 
-/* Finish galleries: add photos here (in img/), first one opens first */
+/* Finish slideshows: photos per finish, in order (files in img/; pos = object-position for the crop) */
 var GALLERY = {
   'Flake': [
-    {src:'img/flake-photo.webp', alt:'Grey, black, white and blue flake epoxy floor in a workshop', w:838, h:1116}
+    {src:'img/flake-photo.webp', alt:'Grey, black, white and blue flake epoxy floor in a workshop', w:838, h:1116},
+    {src:'img/flake-gen-1.webp', alt:'Grey, black and white flake epoxy garage floor with a glossy clear coat and a wooden workbench', w:1024, h:1536} // generated (gpt-image-1)
   ],
   'Metallic': [
     {src:'img/metallic-photo.webp', alt:'Copper-brown metallic epoxy floor with swirls, ceiling lights reflected in the gloss', w:1008, h:1138}
   ],
   'Solid color': [
-    {src:'img/solid-photo.webp', alt:'Glossy light grey solid-color epoxy floor reflecting the windows', w:814, h:624}
+    {src:'img/solid-photo.webp', alt:'Glossy light grey solid-color epoxy floor reflecting the windows', w:814, h:624, pos:'72% 50%'}
   ]
 };
 document.documentElement.classList.add('js');
@@ -528,34 +509,46 @@ document.documentElement.classList.add('js');
   });
 })();
 
-/* ===== Finish gallery: cards open it; its button picks the finish and goes to the form ===== */
+/* ===== Finish band: the pills switch the slideshow behind them; it auto-advances, swipes, and has arrows and dots ===== */
 (function(){
-  var dlg=document.getElementById('gallery');if(!dlg||!dlg.showModal)return;
-  var track=document.getElementById('gal-track'),title=document.getElementById('gal-title'),count=document.getElementById('gal-count'),
-      quote=document.getElementById('gal-quote'),prev=document.getElementById('gal-prev'),next=document.getElementById('gal-next'),
-      reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,list=[],idx=0,opener=null;
-  function sync(){count.textContent=(idx+1)+' of '+list.length;prev.disabled=idx===0;next.disabled=idx===list.length-1}
-  function go(i){i=Math.max(0,Math.min(list.length-1,i));track.scrollTo({left:i*track.clientWidth,behavior:reduce?'auto':'smooth'})}
-  function open(fin,from){
-    list=GALLERY[fin]||[];if(!list.length)return false;
-    opener=from;idx=0;title.textContent=fin;
+  var band=document.getElementById('finish');if(!band)return;
+  var track=document.getElementById('fin-track'),dots=document.getElementById('fin-dots'),quote=document.getElementById('fin-quote'),
+      prev=band.querySelector('.fin-nav.prev'),next=band.querySelector('.fin-nav.next'),pillbox=band.querySelector('.pills'),
+      pills=[].slice.call(band.querySelectorAll('.pill')),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,
+      DELAY=5000,list=[],idx=0,timer=null,inView=false,paused=false,heldUntil=0;
+  function go(i){if(list.length<2)return;i=(i+list.length)%list.length;track.scrollTo({left:i*track.clientWidth,behavior:reduce?'auto':'smooth'})}
+  function sync(){[].forEach.call(dots.children,function(d,i){d.setAttribute('aria-current',i===idx?'true':'false')})}
+  // auto-advance only while on screen, not hovered or focused, not right after a manual move, and never under reduced motion
+  function restart(){clearInterval(timer);timer=null;if(!reduce&&inView&&!paused&&list.length>1&&!document.hidden)timer=setInterval(function(){if(Date.now()>heldUntil)go(idx+1)},DELAY)}
+  function hold(){heldUntil=Date.now()+DELAY*2}
+  function show(fin){
+    list=GALLERY[fin]||[];idx=0;
+    pills.forEach(function(p){p.setAttribute('aria-pressed',p.getAttribute('data-pick')===fin?'true':'false')});
     quote.setAttribute('data-finish',fin);quote.textContent='Get a quote for '+fin.toLowerCase();
-    track.textContent='';
-    list.forEach(function(p){var f=document.createElement('figure'),im=new Image();im.src=p.src;im.alt=p.alt;im.width=p.w;im.height=p.h;im.decoding='async';f.appendChild(im);track.appendChild(f)});
-    var many=list.length>1;prev.hidden=next.hidden=count.hidden=!many;
-    sync();document.documentElement.classList.add('gal-open');dlg.showModal();track.scrollLeft=0;
-    return true;
+    track.setAttribute('aria-label',fin+' photos');track.textContent='';dots.textContent='';
+    list.forEach(function(p,i){
+      var f=document.createElement('figure'),im=new Image();im.src=p.src;im.alt=p.alt;im.width=p.w;im.height=p.h;im.decoding='async';
+      if(p.pos)im.style.objectPosition=p.pos;f.appendChild(im);track.appendChild(f);
+      var d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Photo '+(i+1)+' of '+list.length);
+      d.addEventListener('click',function(){hold();go(i)});dots.appendChild(d);
+    });
+    prev.hidden=next.hidden=dots.hidden=list.length<2;
+    track.scrollLeft=0;sync();restart();
   }
-  document.addEventListener('click',function(e){var c=e.target.closest('[data-gallery]');if(c&&open(c.getAttribute('data-gallery'),c))e.preventDefault()});
+  pillbox.hidden=false;
+  pills.forEach(function(p){p.addEventListener('click',function(){show(p.getAttribute('data-pick'))})});
+  prev.addEventListener('click',function(){hold();go(idx-1)});
+  next.addEventListener('click',function(){hold();go(idx+1)});
   track.addEventListener('scroll',function(){var i=Math.round(track.scrollLeft/track.clientWidth);if(i!==idx){idx=i;sync()}},{passive:true});
-  prev.addEventListener('click',function(){go(idx-1)});
-  next.addEventListener('click',function(){go(idx+1)});
-  dlg.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'){go(idx-1);e.preventDefault()}else if(e.key==='ArrowRight'){go(idx+1);e.preventDefault()}});
-  document.getElementById('gal-close').addEventListener('click',function(){dlg.close()});
-  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
-  // the quote button: close, then let the link scroll to the form (the chip handler above picks the finish)
-  quote.addEventListener('click',function(){opener=null;dlg.close()});
-  dlg.addEventListener('close',function(){document.documentElement.classList.remove('gal-open');if(opener)opener.focus({preventScroll:true})});
+  ['pointerdown','wheel'].forEach(function(ev){track.addEventListener(ev,hold,{passive:true})});
+  band.addEventListener('mouseenter',function(){paused=true;restart()});
+  band.addEventListener('mouseleave',function(){paused=false;restart()});
+  band.addEventListener('focusin',function(){paused=true;restart()});
+  band.addEventListener('focusout',function(e){if(!band.contains(e.relatedTarget)){paused=false;restart()}});
+  document.addEventListener('visibilitychange',restart);
+  addEventListener('resize',function(){track.scrollLeft=idx*track.clientWidth});
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){inView=es[0].isIntersecting;restart()},{threshold:.4}).observe(band);
+  show('Flake');
 })();
 
 /* ===== Quote form: composes a text ===== */
