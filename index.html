@@ -690,57 +690,65 @@ document.documentElement.classList.add('js');
   });
 })();
 
-/* ===== Finish band: the pills switch the slideshow behind them; it auto-advances, swipes, and has arrows and dots.
-   Past the last photo it moves on to the next finish (Flake > Metallic > Solid color > Flake), and back before the first. ===== */
+/* ===== Finish band: every finish's photos sit in one continuous track (Flake > Metallic > Solid color, then a copy of the
+   first photo so the loop wraps without rewinding). The pills and dots follow whichever finish is on screen; it
+   auto-advances, swipes, and has arrows and dots. ===== */
 (function(){
   var band=document.getElementById('finish');if(!band)return;
   var track=document.getElementById('fin-track'),dots=document.getElementById('fin-dots'),
       prev=band.querySelector('.fin-nav.prev'),next=band.querySelector('.fin-nav.next'),pillbox=band.querySelector('.pills'),
       pills=[].slice.call(band.querySelectorAll('.pill')),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,
-      DELAY=5000,list=[],idx=0,timer=null,inView=false,paused=false,heldUntil=0;
-  var ORDER=pills.map(function(p){return p.getAttribute('data-pick')}),cur=ORDER[0];
-  function go(i){
-    var k=ORDER.indexOf(cur);
-    if(i>=list.length){show(ORDER[(k+1)%ORDER.length],0);return}
-    if(i<0){show(ORDER[(k+ORDER.length-1)%ORDER.length],-1);return}
-    track.scrollTo({left:i*track.clientWidth,behavior:reduce?'auto':'smooth'});
+      DELAY=5000,slides=[],start={},idx=0,shownFin=null,timer=null,inView=false,paused=false,heldUntil=0,settle=null;
+  pills.forEach(function(p){var fin=p.getAttribute('data-pick');start[fin]=slides.length;(GALLERY[fin]||[]).forEach(function(ph,i){slides.push({fin:fin,i:i,ph:ph})})});
+  var N=slides.length;
+  track.textContent='';
+  slides.concat([slides[0]]).forEach(function(s,k){
+    var f=document.createElement('figure'),im=new Image(),p=s.ph;im.src=p.src;im.alt=k===N?'':p.alt;im.width=p.w;im.height=p.h;im.decoding='async';
+    if(k>1)im.loading='lazy';if(p.pos)im.style.objectPosition=p.pos;if(k===N)f.setAttribute('aria-hidden','true');f.appendChild(im);track.appendChild(f);
+  });
+  function wid(){return track.clientWidth}
+  function scrollTo(k,instant){track.scrollTo({left:k*wid(),behavior:(reduce||instant)?'auto':'smooth'})}
+  function go(k){
+    if(k<0){track.scrollLeft=N*wid();k=N-1}          // jump to the copy of the first photo, then glide back to the last
+    scrollTo(Math.min(k,N));
   }
-  function sync(){[].forEach.call(dots.children,function(d,i){d.setAttribute('aria-current',i===idx?'true':'false')})}
+  function sync(){
+    var s=slides[idx%N],fin=s.fin,count=(GALLERY[fin]||[]).length;
+    if(fin!==shownFin){
+      shownFin=fin;track.setAttribute('aria-label',fin+' photos');
+      pills.forEach(function(p){p.setAttribute('aria-pressed',p.getAttribute('data-pick')===fin?'true':'false')});
+      dots.textContent='';
+      for(var i=0;i<count;i++)(function(i){var d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Photo '+(i+1)+' of '+count);
+        d.addEventListener('click',function(){hold();go(start[fin]+i)});dots.appendChild(d)})(i);
+      dots.hidden=count<2;
+    }
+    [].forEach.call(dots.children,function(d,i){d.setAttribute('aria-current',i===s.i?'true':'false')});
+  }
   // auto-advance only while on screen, not hovered or focused, not right after a manual move, and never under reduced motion
   function restart(){clearInterval(timer);timer=null;if(!reduce&&inView&&!paused&&!document.hidden)timer=setInterval(function(){if(Date.now()>heldUntil)go(idx+1)},DELAY)}
   function hold(){heldUntil=Date.now()+DELAY*2}
-  function show(fin,at){
-    cur=fin;list=GALLERY[fin]||[];idx=at<0?list.length-1:0;
-    pills.forEach(function(p){p.setAttribute('aria-pressed',p.getAttribute('data-pick')===fin?'true':'false')});
-    track.setAttribute('aria-label',fin+' photos');track.textContent='';dots.textContent='';
-    list.forEach(function(p,i){
-      var f=document.createElement('figure'),im=new Image();im.src=p.src;im.alt=p.alt;im.width=p.w;im.height=p.h;im.decoding='async';
-      if(p.pos)im.style.objectPosition=p.pos;f.appendChild(im);track.appendChild(f);
-      var d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Photo '+(i+1)+' of '+list.length);
-      d.addEventListener('click',function(){hold();go(i)});dots.appendChild(d);
-    });
-    prev.hidden=next.hidden=false;dots.hidden=list.length<2;
-    track.scrollLeft=idx*track.clientWidth;sync();restart();
-  }
-  pillbox.hidden=false;
-  pills.forEach(function(p){p.addEventListener('click',function(){show(p.getAttribute('data-pick'))})});
+  pillbox.hidden=false;prev.hidden=next.hidden=false;
+  pills.forEach(function(p){p.addEventListener('click',function(){hold();go(start[p.getAttribute('data-pick')])})});
   prev.addEventListener('click',function(){hold();go(idx-1)});
   next.addEventListener('click',function(){hold();go(idx+1)});
-  track.addEventListener('scroll',function(){var i=Math.round(track.scrollLeft/track.clientWidth);if(i!==idx){idx=i;sync()}},{passive:true});
+  track.addEventListener('scroll',function(){
+    var k=Math.round(track.scrollLeft/wid());if(k!==idx){idx=k;sync()}
+    // once it comes to rest on the copy of the first photo, swap to the real one (they look identical)
+    clearTimeout(settle);settle=setTimeout(function(){if(Math.round(track.scrollLeft/wid())===N){track.scrollLeft=0;idx=0;sync()}},140);
+  },{passive:true});
   ['pointerdown','wheel'].forEach(function(ev){track.addEventListener(ev,hold,{passive:true})});
-  // a swipe past either end can't scroll any further, so catch it and change finish
+  // a swipe right on the very first photo can't scroll, so catch it and glide to the last one
   var tx=null;
   track.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
-  track.addEventListener('touchend',function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;tx=null;
-    if(dx<-50&&idx===list.length-1){hold();go(list.length)}else if(dx>50&&idx===0){hold();go(-1)}},{passive:true});
+  track.addEventListener('touchend',function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;tx=null;if(dx>50&&idx===0){hold();go(-1)}},{passive:true});
   band.addEventListener('mouseenter',function(){paused=true;restart()});
   band.addEventListener('mouseleave',function(){paused=false;restart()});
   band.addEventListener('focusin',function(){paused=true;restart()});
   band.addEventListener('focusout',function(e){if(!band.contains(e.relatedTarget)){paused=false;restart()}});
   document.addEventListener('visibilitychange',restart);
-  addEventListener('resize',function(){track.scrollLeft=idx*track.clientWidth});
+  addEventListener('resize',function(){track.scrollLeft=idx*wid()});
   if('IntersectionObserver' in window)new IntersectionObserver(function(es){inView=es[0].isIntersecting;restart()},{threshold:.4}).observe(band);
-  show('Flake');
+  sync();restart();
 })();
 
 /* ===== Quote form: composes a text ===== */
