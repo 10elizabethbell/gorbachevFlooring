@@ -17,9 +17,9 @@ The hero, link card and logo are procedural renders I made for this site in `too
 |---|---|---|---|
 | `img/hero-900/1600/2400.webp` | navy and copper metallic epoxy, looking across the floor (desktop) | generated, `tools/render-floors.html#hero` | original work for this site, no third-party rights |
 | `img/hero-phone.webp` | same floor, portrait, window light low in the frame (phones) | generated, `#heroPhone` | same |
-| `img/flake-1/2/3.webp` | wide shots of garages with flake epoxy floors (grey, grey, tan) | **generated** 2026-10-20: `-1` OpenAI gpt-image-1, `-2`/`-3` Z-Image Turbo run locally (mflux). Prompts in `~/.local/share/genimg/log.jsonl` and `src-assets/gen/band/prompts.tsv` | generated; OpenAI's terms assign output to the user, Z-Image Turbo is Apache-2.0. Shown as examples of the finish, not as the client's jobs |
+| `img/flake-1/2/3.webp` | wide shots of garages with flake epoxy floors (grey, blue-grey, tan) | **generated** 2026-10-20: `-1` OpenAI gpt-image-1, `-2`/`-3` Z-Image Turbo run locally (mflux). Prompts in `~/.local/share/genimg/log.jsonl` and `src-assets/gen/band/prompts.tsv` | generated; OpenAI's terms assign output to the user, Z-Image Turbo is Apache-2.0. Shown as examples of the finish, not as the client's jobs |
 | `img/metallic-1/2/3.webp` | basement lounges and a garage with metallic epoxy floors (copper-brown, copper/charcoal, silver) | same | same |
-| `img/solid-1/2/3.webp` | garages and a workshop with solid-colour epoxy floors (light grey, grey with a yellow line, charcoal) | same | same |
+| `img/solid-1/2/3.webp` | a garage, a basement laundry and a workshop with solid-colour epoxy floors (light grey, sandstone beige, charcoal) | same | same |
 | `og.jpg`, `favicon.svg`, `apple-touch-icon.png` | link card and logo | made from the hero render + the drawn logo (`tools/og.html`) | original work for this site |
 
 **Looked for and rejected (so nobody re-checks them):**
