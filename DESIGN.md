@@ -270,6 +270,7 @@ Full pills, confident, never more than two side by side.
 ### Cards / Containers
 - **Form card:** 24px radius, white, padding clamp(20px, 5vw, 32px), max 600px, 22px between fields, no border, no shadow.
 - **Finish card:** a whole-card link, 24px radius, 4:3 on phones and 4:5 from 760px, photo filling it with `object-fit: cover` (the landscape solid-colour photo is positioned 72% across to keep its window reflections), bottom gradient, white Cal Sans 26px name bottom-left and an arrow circle bottom-right.
+- **Finish gallery:** a modal `<dialog>` opened by a finish card (no-JS falls back to the card's `#quote` link). Deep navy; full screen on phones, a 24px-radius panel up to 1040×860 on desktop. Cal Sans title and a "2 of 5" counter top left, a round × top right, photos in a horizontal scroll-snap track (`object-fit: contain`), round prev/next arrows (hidden with one photo), and a full-width copper "Get a quote for <finish>" pill at the bottom that closes it and pre-selects the finish in the form. Esc, the backdrop and × close it and return focus to the card.
 
 ### Inputs / Fields
 - **Style:** Field Tint fill, 10px radius, 2px transparent border, 52px min height (textarea 110px, vertical resize), Ink text, Soft Slate placeholders, navy caret.
