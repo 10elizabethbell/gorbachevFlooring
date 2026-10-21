@@ -16,8 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preload" as="image" href="img/hero-phone.webp" media="(max-width:759px)">
-<link rel="preload" as="image" href="img/hero-1600.webp" imagesrcset="img/hero-900.webp 900w, img/hero-1600.webp 1600w, img/hero-2400.webp 2400w" imagesizes="100vw" media="(min-width:760px)">
+<link rel="preload" as="image" href="img/garage.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap">
@@ -104,13 +103,29 @@ section{padding:64px 0}
 @media (max-width:440px){.brand{gap:8px}.brand svg{width:34px;height:34px}.brand .wide{display:none}.brand span span{letter-spacing:.12em}}
 @media (max-width:374px){.brand svg{width:32px;height:32px}.brand b{font-size:19px}.tel{font-size:16px}.tel svg{display:none}}
 
-/* ---------- Hero: a metallic epoxy floor under navy ---------- */
-.hero{padding:0;position:relative;min-height:100vh;min-height:100svh;display:grid;align-content:center;background:var(--deep);color:var(--on-dark);overflow:hidden;isolation:isolate}
-.hero-photo{position:absolute;inset:0;z-index:-2}
-.hero-photo picture{display:block;width:100%;height:100%}
-.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 100%}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,29,49,.86) 0%,rgba(11,29,49,.8) 66%,rgba(11,29,49,.3) 100%)}
-.hero-copy{position:relative;z-index:1;display:grid;gap:20px;justify-items:start;padding-top:104px;padding-bottom:72px}
+/* ---------- Hero: a garage being coated; rub the floor and the crew re-coats it ---------- */
+.hero{padding:0;position:relative;min-height:100vh;min-height:100svh;display:grid;align-content:start;background:var(--deep);color:var(--on-dark);overflow:hidden;isolation:isolate;touch-action:pan-y}
+.hero-photo{position:absolute;inset:0;z-index:-4}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+/* bare concrete shows through only where the visitor rubbed the coat away */
+.rub{position:absolute;inset:0;z-index:-3;width:100%;height:100%;pointer-events:none}
+.man{position:absolute;left:0;top:0;z-index:-2;display:none;pointer-events:none;transform-origin:0 0;will-change:transform}
+.js .man.on{display:block}
+.man img,.man svg{display:block;width:100%;height:100%}
+.man-shadow{position:absolute;left:0;top:0;z-index:-2;width:100px;height:20px;border-radius:50%;background:rgba(11,29,49,.34);filter:blur(6px);pointer-events:none;display:none;will-change:transform}
+.js .man-shadow{display:block}
+/* the top of the scene darkens for the headline; the floor stays clear */
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(11,29,49,.9) 0%,rgba(11,29,49,.74) 30%,rgba(11,29,49,.2) 52%,rgba(11,29,49,0) 66%)}
+.hero-copy{position:relative;z-index:1;display:grid;gap:20px;justify-items:start;padding-top:96px;padding-bottom:24px;pointer-events:none}
+.hero-copy>*{pointer-events:auto}
+.rub-hint{position:absolute;left:50%;bottom:max(28px,env(safe-area-inset-bottom));z-index:2;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:var(--pill);background:rgba(11,29,49,.72);color:#fff;font:500 15px/1 var(--text);pointer-events:none;transition:opacity .4s}
+.rub-hint svg{width:18px;height:18px}
+.rub-hint.gone{opacity:0}
+/* prototype only: compare the two ways of drawing the crew member */
+.proto{position:absolute;left:16px;bottom:max(84px,calc(env(safe-area-inset-bottom) + 56px));z-index:2;display:flex;align-items:center;gap:4px;padding:4px;border-radius:var(--pill);background:rgba(11,29,49,.78);font:500 13px/1 var(--text);color:var(--on-dark-soft)}
+.proto span{padding:0 6px 0 8px}
+.proto button{min-height:36px;padding:0 12px;border:0;border-radius:var(--pill);background:transparent;color:#fff;font:inherit;cursor:pointer}
+.proto button[aria-pressed="true"]{background:var(--copper);color:var(--ink)}
 .hero h1{color:#fff;font-size:clamp(42px,12vw,80px);line-height:1.02;max-width:12ch}
 /* H1 bounce-in (after lpmr.co.uk): each letter slides in from 50px right with a slight overshoot, 20ms apart */
 .hero h1 .w{display:inline-block;white-space:nowrap}
@@ -229,9 +244,8 @@ footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--on-d
   .brand b{font-size:24px}
   .tel{font-size:20px}
   section{padding:96px 0}
-  .hero-copy{padding-top:132px;padding-bottom:96px}
-  .hero-photo img{object-position:62% 50%}
-  .hero::after{background:linear-gradient(90deg,rgba(11,29,49,.86) 0%,rgba(11,29,49,.66) 55%,rgba(11,29,49,.4) 100%),linear-gradient(180deg,rgba(11,29,49,.2),rgba(11,29,49,.5))}
+  .hero-copy{padding-top:132px}
+  .hero::after{background:linear-gradient(180deg,rgba(11,29,49,.9) 0%,rgba(11,29,49,.72) 30%,rgba(11,29,49,.16) 52%,rgba(11,29,49,0) 64%),linear-gradient(90deg,rgba(11,29,49,.55) 0%,rgba(11,29,49,0) 50%)}
   .hero h1{max-width:14ch}
   .promise{max-width:none}
   .actions{grid-auto-flow:column;justify-content:start;width:auto}
@@ -282,7 +296,7 @@ footer a:hover{color:var(--copper)}
 THESIS: An epoxy crew that wins trust by caring about the part nobody sees: the prep. One claim (your garage, finished like glass), three finishes to pick from, and an easy way to text a photo for a quote.
 OWN-WORLD: Off-white paper, logo-tile navy (#12304f) and deep navy (#0b1d31, faint diagonal lines) bands, copper from metallic epoxy veins as the one warm accent (fills only; #9a4a12 when it has to be text on light). Cal Sans display, system body at 16/1.7. Images are procedural renders of epoxy floors (tools/render-floors.html), never stock photos of other crews' jobs.
 STORY: The visitor sees a floor that shines, believes this crew will treat their garage carefully, picks a finish, and texts a photo for a free quote.
-FIRST VIEWPORT: Full-height hero; a transparent header sits on it with the dripping-G mark and wordmark left, tap-to-call number top right. Hero on a navy-washed metallic floor: eyebrow, "Your garage, finished like glass.", one promise line, one pill button (Get a free quote); texting lives in the floating circle below the hero.
+FIRST VIEWPORT: Full-height hero: a generated photo of an empty two-car garage with a glossy flake floor; a crew member rolls epoxy along the floor. Rubbing the floor (mouse over it, or a sideways finger drag) wipes the coat back to bare concrete; he runs over and rolls it back, then returns to his calm pass. A transparent header and the eyebrow, H1, promise and "Get a free quote" sit on a navy fade at the top.
 FORM: house default calm-photo-style (Ellie 2026-10-19), no concept roll; photo-style hero from a generated render (phone gets its own portrait render with the lit floor below the buttons); finish cards in the kit's work-card shape.
 -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -300,12 +314,21 @@ FORM: house default calm-photo-style (Ellie 2026-10-19), no concept roll; photo-
 
 <main id="top">
 <section class="hero" id="hero" aria-labelledby="h1">
-  <div class="hero-photo" aria-hidden="true">
-    <picture>
-      <source media="(max-width:759px)" srcset="img/hero-phone.webp" width="900" height="1300">
-      <img src="img/hero-1600.webp" srcset="img/hero-900.webp 900w, img/hero-1600.webp 1600w, img/hero-2400.webp 2400w" sizes="100vw" alt="" width="1600" height="900" fetchpriority="high" decoding="async">
-    </picture>
-  </div>
+  <div class="hero-photo" aria-hidden="true"><img src="img/garage.webp" alt="" width="1536" height="1024" fetchpriority="high" decoding="async"></div>
+  <canvas class="rub" id="rub" aria-hidden="true"></canvas>
+  <div class="man-shadow" id="man-shadow" aria-hidden="true"></div>
+  <div class="man" id="man-photo" aria-hidden="true"><img src="img/man-roll.webp" alt="" width="373" height="520" decoding="async"><img src="img/man-run.webp" alt="" width="391" height="520" decoding="async" hidden></div>
+  <div class="man" id="man-drawn" aria-hidden="true"><svg viewBox="0 0 260 520"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path id="d-pole" stroke="#c9ccd1" stroke-width="7"/><path id="d-grip" stroke="#e8743b" stroke-width="9"/>
+    <path id="d-legB" stroke="#3d424a" stroke-width="30"/><path id="d-bootB" stroke="#15171a" stroke-width="22"/>
+    <path id="d-armB" stroke="#1b2a44" stroke-width="20"/>
+    <path id="d-torso" stroke="#1d2f4d" stroke-width="58"/>
+    <path id="d-legF" stroke="#4b5059" stroke-width="30"/><path id="d-bootF" stroke="#1b1d21" stroke-width="22"/>
+    <path id="d-armF" stroke="#24375a" stroke-width="20"/><path id="d-handF" stroke="#111" stroke-width="18"/>
+    <path id="d-roller" stroke="#ececec" stroke-width="20"/>
+  </g><circle id="d-head" r="27" fill="#c9987a"/><path id="d-hair" fill="#2a1f19"/></svg></div>
+  <p class="rub-hint" id="rub-hint" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rub the floor</p>
+  <div class="proto" id="proto" hidden><span>Prototype:</span><button type="button" data-man="photo" aria-pressed="true">Photo man</button><button type="button" data-man="drawn" aria-pressed="false">Drawn man</button></div>
   <div class="wrap hero-copy">
     <span class="eyebrow">Epoxy floor coatings</span>
     <h1 id="h1">Your garage, <span class="accent">finished like glass.</span></h1>
@@ -501,6 +524,155 @@ document.documentElement.classList.add('js');
   var frag=document.createDocumentFragment();split(h,frag);h.textContent='';h.appendChild(frag);
   // once the last letter lands, put the plain heading back so kerning and text selection return
   if(last)last.addEventListener('animationend',function(){h.innerHTML=plain;h.removeAttribute('aria-label')});
+})();
+
+/* ===== Hero garage: rub the floor to wipe the coat off; the crew member runs over and rolls it back ===== */
+(function(){
+  var hero=document.getElementById('hero'),cv=document.getElementById('rub');if(!hero||!cv||!cv.getContext)return;
+  var IW=1536,IH=1024,POSY=.6;                       // garage.webp size and its object-position
+  var FLOOR=[[445,540],[1052,540],[1445,738],[1536,758],[1536,1024],[0,1024],[0,745],[75,665]];
+  var Y_MIN=585,Y_MAX=840,SZ=1;                      // where his feet may go (image px); phones shrink him a little
+  function hAt(y){return Math.max(150,(y-330)*1.02)*SZ} // figure height at a floor depth (image px)
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ctx=cv.getContext('2d'),bare=new Image(),mask=document.createElement('canvas'),mctx=mask.getContext('2d');
+  mask.width=IW/2;mask.height=IH/2;
+  var floorPath=new Path2D();FLOOR.forEach(function(p,i){floorPath[i?'lineTo':'moveTo'](p[0]/2,p[1]/2)});floorPath.closePath();
+  mctx.save();mctx.clip(floorPath);
+  bare.src='img/garage-bare.webp';bare.onload=function(){dirty=true};
+  var W=0,H=0,S=1,OX=0,OY=0,dpr=1,laneA=800,laneB=1380,dirty=true;
+  function layout(){
+    var r=hero.getBoundingClientRect();W=r.width;H=r.height;S=Math.max(W/IW,H/IH);OX=(W-IW*S)/2;OY=(H-IH*S)*POSY;
+    dpr=Math.min(devicePixelRatio||1,2);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    var x0=Math.max(80,-OX/S),x1=Math.min(1450,(W-OX)/S);
+    if(W>=760){laneA=Math.max(x0,760);laneB=x1-60;SZ=1;Y_MAX=840}else{var c=(x0+x1)/2,hw=(x1-x0)*.16;laneA=c-hw*1.4;laneB=c+hw*.4;SZ=.74;Y_MAX=760}
+    dirty=true;
+  }
+  function toImg(cx,cy){return [(cx-OX)/S,(cy-OY)/S]}
+  function paint(){
+    dirty=false;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    if(!bare.complete||!bare.naturalWidth)return;
+    ctx.globalCompositeOperation='source-over';ctx.drawImage(bare,OX,OY,IW*S,IH*S);
+    ctx.globalCompositeOperation='destination-in';ctx.drawImage(mask,OX,OY,IW*S,IH*S);
+    ctx.globalCompositeOperation='source-over';
+  }
+  function dab(x,y,r,off){mctx.globalCompositeOperation=off?'destination-out':'source-over';mctx.fillStyle='#000';mctx.beginPath();mctx.arc(x/2,y/2,r/2,0,7);mctx.fill();dirty=true}
+  function line(a,b,r){mctx.globalCompositeOperation='source-over';mctx.strokeStyle='#000';mctx.lineCap='round';mctx.lineWidth=r;mctx.beginPath();mctx.moveTo(a[0]/2,a[1]/2);mctx.lineTo(b[0]/2,b[1]/2);mctx.stroke();dirty=true}
+
+  /* --- the crew member: one state machine, two looks (photo cut-out or drawn figure) --- */
+  var look=/[?&]man=drawn/.test(location.search)?'drawn':'photo';
+  var elP=document.getElementById('man-photo'),elD=document.getElementById('man-drawn'),shadow=document.getElementById('man-shadow');
+  var imgRoll=elP.children[0],imgRun=elP.children[1];
+  var SPR={roll:{w:373,ax:83,rx:264},run:{w:391,ax:123,rx:250},drawn:{w:260,ax:90,rx:170}};
+  var man={x:(laneA+laneB)/2,y:700,dir:1,state:'calm',ph:0,rph:0},pending=[],lastRub=0,lastPt=null,target=null;
+  function rollerX(m,y){return m.dir*(SPR[look==='drawn'?'drawn':'roll'].rx/520)*hAt(y)}
+  function show(){elP.classList.toggle('on',look==='photo');elD.classList.toggle('on',look==='drawn')}
+
+  // drawn figure: simple forward kinematics, redrawn each frame (feet on y=505, facing right)
+  var D={};['pole','grip','legB','bootB','armB','torso','legF','bootF','armF','handF','roller','head','hair'].forEach(function(k){D[k]=document.getElementById('d-'+k)});
+  function ik(s,h,l1,l2){var dx=h[0]-s[0],dy=h[1]-s[1],d=Math.min(Math.hypot(dx,dy),l1+l2-1),a=Math.atan2(dy,dx),b=Math.acos((l1*l1+d*d-l2*l2)/(2*l1*d));return [s[0]+l1*Math.cos(a+b),s[1]+l1*Math.sin(a+b)]}
+  function P(a){return a[0].toFixed(1)+' '+a[1].toFixed(1)}
+  function drawFigure(mode,ph,rph){
+    var run=mode==='run',amp=run?.62:.26,bob=(run?7:3)*Math.abs(Math.sin(ph)),lean=run?38:22;
+    var hip=[90,280-bob],sh=[hip[0]+lean,hip[1]-128],head=[sh[0]+10,sh[1]-42];
+    function leg(sg){var a=sg*amp*Math.sin(ph),bend=Math.max(0,sg*Math.sin(ph+1.2))*(run?1.1:.45),k=[hip[0]+118*Math.sin(a),hip[1]+118*Math.cos(a)],f=[k[0]+110*Math.sin(a-bend),k[1]+110*Math.cos(a-bend)];return [k,f]}
+    var lf=leg(1),lb=leg(-1);
+    D.legF.setAttribute('d','M'+P(hip)+'L'+P(lf[0])+'L'+P(lf[1]));D.bootF.setAttribute('d','M'+P([lf[1][0]-4,lf[1][1]+4])+'l26 2');
+    D.legB.setAttribute('d','M'+P(hip)+'L'+P(lb[0])+'L'+P(lb[1]));D.bootB.setAttribute('d','M'+P([lb[1][0]-4,lb[1][1]+4])+'l26 2');
+    D.torso.setAttribute('d','M'+P([hip[0],hip[1]-10])+'L'+P(sh));
+    D.head.setAttribute('cx',head[0]);D.head.setAttribute('cy',head[1]);
+    D.hair.setAttribute('d','M'+(head[0]-27)+' '+(head[1]-3)+'a27 27 0 0 1 54 0q-24-9-54 0z');
+    var R=run?[hip[0]+150,452]:[hip[0]+150+26*Math.sin(rph),496],T=[R[0]-150,R[1]-252];
+    function on(t){return [R[0]+(T[0]-R[0])*t,R[1]+(T[1]-R[1])*t]}
+    var hf=on(.5),hb=on(.8);
+    D.pole.setAttribute('d','M'+P(R)+'L'+P(T));D.grip.setAttribute('d','M'+P(on(.08))+'L'+P(on(.16)));
+    D.roller.setAttribute('d','M'+P([R[0]-9,R[1]])+'l18 0');
+    D.armB.setAttribute('d','M'+P(sh)+'L'+P(ik(sh,hb,82,80))+'L'+P(hb));
+    D.armF.setAttribute('d','M'+P(sh)+'L'+P(ik(sh,hf,82,80))+'L'+P(hf));D.handF.setAttribute('d','M'+P(hf)+'l0 0');
+  }
+
+  function place(t){
+    var h=hAt(man.y)*S,k=h/520,sx=OX+man.x*S,sy=OY+man.y*S,flip=man.dir<0,el,spr,lift=0,tilt=0;
+    if(look==='drawn'){el=elD;spr=SPR.drawn;drawFigure(man.state==='run'?'run':'roll',man.ph,man.rph)}
+    else{
+      var running=man.state==='run';imgRoll.hidden=running;imgRun.hidden=!running;el=elP;spr=running?SPR.run:SPR.roll;
+      lift=running?Math.abs(Math.sin(man.ph))*10*k:Math.abs(Math.sin(man.ph))*3*k;tilt=running?0:Math.sin(man.rph)*1.2;
+      el.style.width=spr.w+'px';
+    }
+    el.style.height='520px';el.style.width=spr.w+'px';
+    var tx=flip?sx+spr.ax*k:sx-spr.ax*k;
+    el.style.transform='translate('+tx.toFixed(1)+'px,'+(sy-520*k-lift).toFixed(1)+'px) scale('+(flip?-k:k).toFixed(4)+','+k.toFixed(4)+') rotate('+tilt.toFixed(2)+'deg)';
+    var sw=h*.42;shadow.style.width=sw+'px';shadow.style.height=sw*.18+'px';
+    shadow.style.transform='translate('+(sx-sw*.5+man.dir*h*.06).toFixed(1)+'px,'+(sy-sw*.09).toFixed(1)+'px)';
+  }
+
+  function nearest(px,py){var bi=-1,bd=1e9;pending.forEach(function(p,i){var d=Math.hypot(p[0]-px,p[1]-py);if(d<bd){bd=d;bi=i}});return bi}
+  function step(dt,now){
+    var spd;
+    if(man.state==='calm'){
+      man.ph+=dt*3.2;man.rph+=dt*2.4;
+      man.x+=man.dir*48*dt;
+      if(man.x>laneB){man.x=laneB;man.dir=-1;man.y=Math.min(Y_MAX,Math.max(Y_MIN,man.y+(Math.random()-.5)*90))}
+      if(man.x<laneA){man.x=laneA;man.dir=1;man.y=Math.min(Y_MAX,Math.max(Y_MIN,man.y+(Math.random()-.5)*90))}
+      if(pending.length&&now-lastRub>350)man.state='run';
+    }
+    if(man.state==='run'||man.state==='coat'){
+      if(!pending.length){man.state='calm';return}
+      var rx=man.x+rollerX(man,man.y),i=nearest(rx,man.y),p=pending[i];
+      var dir=p[0]>=man.x?1:-1;
+      if(man.state==='run'||Math.abs(p[0]-rx)>140)man.dir=dir;
+      var fy=Math.min(Y_MAX,Math.max(Y_MIN,p[1])),fx=p[0]-rollerX(man,fy);
+      var dx=fx-man.x,dy=fy-man.y,d=Math.hypot(dx,dy);
+      spd=man.state==='run'?560:300;man.ph+=dt*(man.state==='run'?13:6);man.rph+=dt*9;
+      if(d<=spd*dt+2){man.x=fx;man.y=fy;
+        if(man.state==='run')man.state='coat';
+        var r=brush()*2.6;for(var j=pending.length-1;j>=0;j--){var q=pending[j];if(Math.hypot(q[0]-p[0],q[1]-p[1])<r*.5){dab(q[0],q[1],r,true);pending.splice(j,1)}}
+        dab(p[0],p[1],r,true);
+        // last spot done and no one rubbing: wipe any slivers the roller missed
+        if(!pending.length&&now-lastRub>350){mctx.clearRect(0,0,mask.width,mask.height);dirty=true}
+      }else{man.x+=dx/d*spd*dt;man.y+=dy/d*spd*dt}
+    }
+  }
+  function brush(){return 34/S}
+
+  /* --- input: a mouse rubs by moving over the floor; a finger rubs by dragging sideways (vertical drags still scroll) --- */
+  function inFloor(x,y){return mctx.isPointInPath(floorPath,x/2,y/2)}
+  var hint=document.getElementById('rub-hint'),hinted=false;
+  hero.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse'&&!e.buttons&&!e.pressure)return;
+    if(e.target.closest('a,button'))return;
+    var r=hero.getBoundingClientRect(),q=toImg(e.clientX-r.left,e.clientY-r.top),now=performance.now();
+    if(!inFloor(q[0],q[1])){lastPt=null;return}
+    var br=brush();
+    if(lastPt&&now-lastPt[2]<120)line(lastPt,q,br*2);else dab(q[0],q[1],br*2,false);
+    var last=pending[pending.length-1];if(!last||Math.hypot(last[0]-q[0],last[1]-q[1])>br*.6)pending.push([q[0],q[1]]);
+    lastPt=[q[0],q[1],now];lastRub=now;
+    if(!hinted){hinted=true;hint.classList.add('gone')}
+    if(reduce){clearTimeout(hero._t);hero._t=setTimeout(function(){pending.forEach(function(p){dab(p[0],p[1],br*2.6,true)});pending=[];paint()},900);paint()}
+  });
+  hero.addEventListener('pointerleave',function(){lastPt=null});
+
+  /* --- loop: only while the hero is on screen --- */
+  var running=false,prev=0;
+  function frame(now){
+    if(!running)return;
+    var dt=Math.min(.05,(now-(prev||now))/1000);prev=now;
+    step(dt,now);place(now);if(dirty)paint();
+    requestAnimationFrame(frame);
+  }
+  function start(){if(running||reduce)return;running=true;prev=0;requestAnimationFrame(frame)}
+  function stop(){running=false}
+  layout();man.x=(laneA+laneB)/2;show();place(0);paint();
+  addEventListener('resize',function(){layout();man.x=Math.min(laneB,Math.max(laneA,man.x));place(0);paint()});
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){es[0].isIntersecting&&!document.hidden?start():stop()}).observe(hero);else start();
+  document.addEventListener('visibilitychange',function(){document.hidden?stop():start()});
+  setTimeout(function(){hint.hidden=false},reduce?0:1600);
+
+  // prototype toggle between the two looks
+  var proto=document.getElementById('proto');proto.hidden=false;
+  [].forEach.call(proto.querySelectorAll('button'),function(b){
+    b.setAttribute('aria-pressed',b.getAttribute('data-man')===look?'true':'false');
+    b.addEventListener('click',function(){look=b.getAttribute('data-man');[].forEach.call(proto.querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});show();place(0)});
+  });
 })();
 
 /* ===== Service rows and finish cards pre-select the matching chip ===== */
