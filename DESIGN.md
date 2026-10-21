@@ -271,7 +271,7 @@ Full pills, confident, never more than two side by side.
 - **Form card:** 24px radius, white, padding clamp(20px, 5vw, 32px), max 600px, 22px between fields, no border, no shadow.
 - **Hero scene:**
   - **Layers:** a full-screen garage photo (`object-position: 50% 60%`), with a canvas over it that shows bare concrete only where the visitor has rubbed. The canvas uses a half-resolution mask clipped to the floor polygon.
-  - **The crew member:** a DOM layer under the navy fade. He paces a lane slowly with the roller: on the right on desktop, centred and at 74% size on phones. Once a rub has paused for 350 ms, he runs to the nearest wiped spot and rolls it back point by point.
+  - **The crew member:** a drawn figure (inline SVG, limbs posed each frame by simple kinematics: walk, push the roller, run), as a DOM layer under the navy fade. He paces a lane slowly with the roller: on the right on desktop, centred and at 74% size on phones. The moment the floor is wiped (even mid-rub) he runs to the nearest wiped spot and rolls it back point by point, chasing the cursor or finger if the rubbing continues.
   - **Motion limits:** the loop runs only while the hero is on screen. Under reduced motion he stands still, and wiped spots fade back after 0.9 s.
   - **Hint:** a "Rub the floor" pill sits bottom centre and fades on the first rub.
   - **Phones:** `touch-action: pan-y` keeps vertical page scrolling working, so only sideways drags rub.
