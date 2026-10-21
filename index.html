@@ -111,7 +111,7 @@ section{padding:64px 0}
 .rub{position:absolute;inset:0;z-index:-3;width:100%;height:100%;pointer-events:none}
 .man{position:absolute;left:0;top:0;z-index:-2;display:none;pointer-events:none;transform-origin:0 0;will-change:transform}
 .js .man.on{display:block}
-.man svg{display:block;width:100%;height:100%}
+.man svg{display:block;width:100%;height:100%;overflow:visible}
 .man-shadow{position:absolute;left:0;top:0;z-index:-2;width:100px;height:20px;border-radius:50%;background:rgba(11,29,49,.34);filter:blur(6px);pointer-events:none;display:none;will-change:transform}
 .js .man-shadow{display:block}
 /* the top of the scene darkens for the headline; the floor stays clear */
@@ -608,14 +608,16 @@ document.documentElement.classList.add('js');
       spd=man.state==='run'?560:300;man.ph+=dt*(man.state==='run'?13:6);man.rph+=dt*9;
       if(d<=spd*dt+2){man.x=fx;man.y=fy;
         if(man.state==='run')man.state='coat';
-        var r=brush()*2.6;for(var j=pending.length-1;j>=0;j--){var q=pending[j];if(Math.hypot(q[0]-p[0],q[1]-p[1])<r*.5){dab(q[0],q[1],r,true);pending.splice(j,1)}}
+        // phones: he only fixes what is right under the roller, so he has to work along the wipe
+        var small=W<760,r=brush()*(small?2.3:2.6);for(var j=pending.length-1;j>=0;j--){var q=pending[j];if(Math.hypot(q[0]-p[0],q[1]-p[1])<r*(small?.3:.5)){dab(q[0],q[1],r,true);pending.splice(j,1)}}
         dab(p[0],p[1],r,true);
         // last spot done and no one rubbing: wipe any slivers the roller missed
         if(!pending.length&&now-lastRub>350){mctx.clearRect(0,0,mask.width,mask.height);dirty=true}
       }else{man.x+=dx/d*spd*dt;man.y+=dy/d*spd*dt}
     }
   }
-  function brush(){return 34/S}
+  // wipe radius is 2x this (screen px / S): about a fingertip on phones, a palm with a mouse
+  function brush(){return (W<760?11:34)/S}
 
   /* --- input: a mouse rubs by moving over the floor; a finger rubs by dragging sideways (vertical drags still scroll) --- */
   function inFloor(x,y){return mctx.isPointInPath(floorPath,x/2,y/2)}
