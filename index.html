@@ -341,7 +341,6 @@ FORM: house default calm-photo-style (Ellie 2026-10-19), no concept roll; photo-
       <button class="pill" type="button" data-pick="Metallic" aria-pressed="false">Metallic</button>
       <button class="pill" type="button" data-pick="Solid color" aria-pressed="false">Solid color</button>
     </div>
-    <a class="btn btn-primary" id="fin-quote" href="#quote">Get a free quote</a>
   </div>
   <button class="fin-nav prev" type="button" aria-label="Previous photo" hidden><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
   <button class="fin-nav next" type="button" aria-label="Next photo" hidden><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
@@ -512,7 +511,7 @@ document.documentElement.classList.add('js');
 /* ===== Finish band: the pills switch the slideshow behind them; it auto-advances, swipes, and has arrows and dots ===== */
 (function(){
   var band=document.getElementById('finish');if(!band)return;
-  var track=document.getElementById('fin-track'),dots=document.getElementById('fin-dots'),quote=document.getElementById('fin-quote'),
+  var track=document.getElementById('fin-track'),dots=document.getElementById('fin-dots'),
       prev=band.querySelector('.fin-nav.prev'),next=band.querySelector('.fin-nav.next'),pillbox=band.querySelector('.pills'),
       pills=[].slice.call(band.querySelectorAll('.pill')),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,
       DELAY=5000,list=[],idx=0,timer=null,inView=false,paused=false,heldUntil=0;
@@ -524,7 +523,6 @@ document.documentElement.classList.add('js');
   function show(fin){
     list=GALLERY[fin]||[];idx=0;
     pills.forEach(function(p){p.setAttribute('aria-pressed',p.getAttribute('data-pick')===fin?'true':'false')});
-    quote.setAttribute('data-finish',fin);quote.textContent='Get a quote for '+fin.toLowerCase();
     track.setAttribute('aria-label',fin+' photos');track.textContent='';dots.textContent='';
     list.forEach(function(p,i){
       var f=document.createElement('figure'),im=new Image();im.src=p.src;im.alt=p.alt;im.width=p.w;im.height=p.h;im.decoding='async';
