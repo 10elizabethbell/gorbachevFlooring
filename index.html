@@ -527,7 +527,7 @@ document.documentElement.classList.add('js');
   var Y_MIN=585,Y_MAX=840,SZ=1;                      // where his feet may go (image px); phones shrink him a little
   function hAt(y){return Math.max(150,(y-330)*1.02)*SZ} // figure height at a floor depth (image px)
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var ctx=cv.getContext('2d'),bare=new Image(),mask=document.createElement('canvas'),mctx=mask.getContext('2d');
+  var ctx=cv.getContext('2d'),bare=new Image(),mask=document.createElement('canvas'),mctx=mask.getContext('2d'),tmp=document.createElement('canvas'),tctx=tmp.getContext('2d'),chips=[];
   mask.width=IW/2;mask.height=IH/2;
   var floorPath=new Path2D();FLOOR.forEach(function(p,i){floorPath[i?'lineTo':'moveTo'](p[0]/2,p[1]/2)});floorPath.closePath();
   mctx.save();mctx.clip(floorPath);
@@ -535,21 +535,46 @@ document.documentElement.classList.add('js');
   var W=0,H=0,S=1,OX=0,OY=0,dpr=1,laneA=800,laneB=1380,dirty=true;
   function layout(){
     var r=hero.getBoundingClientRect();W=r.width;H=r.height;S=Math.max(W/IW,H/IH);OX=(W-IW*S)/2;OY=(H-IH*S)*POSY;
-    dpr=Math.min(devicePixelRatio||1,2);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    dpr=Math.min(devicePixelRatio||1,2);cv.width=tmp.width=Math.round(W*dpr);cv.height=tmp.height=Math.round(H*dpr);
     var x0=Math.max(80,-OX/S),x1=Math.min(1450,(W-OX)/S);
     if(W>=760){laneA=Math.max(x0,760);laneB=x1-60;SZ=1;Y_MAX=840}else{var c=(x0+x1)/2,hw=(x1-x0)*.16;laneA=c-hw*1.4;laneB=c+hw*.4;SZ=.74;Y_MAX=760}
     dirty=true;
   }
   function toImg(cx,cy){return [(cx-OX)/S,(cy-OY)/S]}
+  /* the wipe reads as chipped coating: raw concrete in a ragged hole, a shadow under the far lip, a lit cut edge, loose flakes around it */
+  function maskAt(c,dx,dy){c.drawImage(mask,OX+dx,OY+dy,IW*S,IH*S)}
   function paint(){
     dirty=false;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
     if(!bare.complete||!bare.naturalWidth)return;
     ctx.globalCompositeOperation='source-over';ctx.drawImage(bare,OX,OY,IW*S,IH*S);
-    ctx.globalCompositeOperation='destination-in';ctx.drawImage(mask,OX,OY,IW*S,IH*S);
-    ctx.globalCompositeOperation='source-over';
+    ctx.globalCompositeOperation='destination-in';maskAt(ctx,0,0);
+    // shadow cast by the coating's far edge onto the concrete
+    tctx.setTransform(dpr,0,0,dpr,0,0);tctx.globalCompositeOperation='source-over';tctx.clearRect(0,0,W,H);maskAt(tctx,0,0);
+    tctx.globalCompositeOperation='destination-out';maskAt(tctx,0,5);
+    tctx.globalCompositeOperation='source-in';tctx.fillStyle='rgba(18,20,24,.55)';tctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation='source-atop';ctx.drawImage(tmp,0,0,W,H);
+    // the cut edge of the coating, catching the light
+    tctx.globalCompositeOperation='source-over';tctx.clearRect(0,0,W,H);
+    [[-2,0],[2,0],[0,-2],[0,2],[-1.4,-1.4],[1.4,1.4],[-1.4,1.4],[1.4,-1.4]].forEach(function(d){maskAt(tctx,d[0],d[1])});
+    tctx.globalCompositeOperation='destination-out';maskAt(tctx,0,0);
+    tctx.globalCompositeOperation='source-in';tctx.fillStyle='rgba(248,247,243,.8)';tctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation='source-over';ctx.drawImage(tmp,0,0,W,H);
+    // loose flakes kicked up around the damage
+    chips.forEach(function(c){var x=OX+c.x*S,y=OY+c.y*S,z=c.s*S;ctx.fillStyle=c.c;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+z,y+z*.3);ctx.lineTo(x+z*.6,y+z*.8);ctx.lineTo(x-z*.2,y+z*.5);ctx.closePath();ctx.fill()});
   }
-  function dab(x,y,r,off){mctx.globalCompositeOperation=off?'destination-out':'source-over';mctx.fillStyle='#000';mctx.beginPath();mctx.arc(x/2,y/2,r/2,0,7);mctx.fill();dirty=true}
-  function line(a,b,r){mctx.globalCompositeOperation='source-over';mctx.strokeStyle='#000';mctx.lineCap='round';mctx.lineWidth=r;mctx.beginPath();mctx.moveTo(a[0]/2,a[1]/2);mctx.lineTo(b[0]/2,b[1]/2);mctx.stroke();dirty=true}
+  var CHIP=['#ecebe6','#a3a6ab','#2b2d31','#cbcdd0'];
+  // tear a ragged piece of coating off at (x,y); r is the radius in image px
+  function tear(x,y,r){
+    mctx.globalCompositeOperation='source-over';mctx.fillStyle='#000';mctx.beginPath();
+    for(var i=0;i<14;i++){var a=i/14*6.283,rr=r*(.68+Math.random()*.38);mctx[i?'lineTo':'moveTo']((x+Math.cos(a)*rr)/2,(y+Math.sin(a)*rr)/2)}
+    mctx.closePath();mctx.fill();
+    if(Math.random()<.6&&chips.length<500){var a2=Math.random()*6.283,d=r*(1.1+Math.random()*1.1);chips.push({x:x+Math.cos(a2)*d,y:y+Math.sin(a2)*d*.55,s:r*(.08+Math.random()*.12),c:CHIP[(Math.random()*4)|0]})}
+    dirty=true;
+  }
+  function tearLine(a,b,r){var d=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.max(1,Math.ceil(d/(r*.35)));for(var i=1;i<=n;i++)tear(a[0]+(b[0]-a[0])*i/n,a[1]+(b[1]-a[1])*i/n,r)}
+  // roll fresh coat over (x,y): fill the hole back in and sweep up nearby flakes
+  function dab(x,y,r){mctx.globalCompositeOperation='destination-out';mctx.fillStyle='#000';mctx.beginPath();mctx.arc(x/2,y/2,r/2,0,7);mctx.fill();
+    chips=chips.filter(function(c){return Math.hypot(c.x-x,c.y-y)>r*1.8});dirty=true}
 
   /* --- the crew member: a drawn figure (260x520 viewBox, feet at x 90, roller ~170 ahead) --- */
   var el=document.getElementById('man-drawn'),shadow=document.getElementById('man-shadow'),FIG={w:260,ax:90,rx:170};
@@ -609,10 +634,10 @@ document.documentElement.classList.add('js');
       if(d<=spd*dt+2){man.x=fx;man.y=fy;
         if(man.state==='run')man.state='coat';
         // phones: he only fixes what is right under the roller, so he has to work along the wipe
-        var small=W<760,r=brush()*(small?2.3:2.6);for(var j=pending.length-1;j>=0;j--){var q=pending[j];if(Math.hypot(q[0]-p[0],q[1]-p[1])<r*(small?.3:.5)){dab(q[0],q[1],r,true);pending.splice(j,1)}}
-        dab(p[0],p[1],r,true);
+        var small=W<760,r=brush()*(small?2.3:2.6);for(var j=pending.length-1;j>=0;j--){var q=pending[j];if(Math.hypot(q[0]-p[0],q[1]-p[1])<r*(small?.3:.5)){dab(q[0],q[1],r);pending.splice(j,1)}}
+        dab(p[0],p[1],r);
         // last spot done and no one rubbing: wipe any slivers the roller missed
-        if(!pending.length&&now-lastRub>350){mctx.clearRect(0,0,mask.width,mask.height);dirty=true}
+        if(!pending.length&&now-lastRub>350){mctx.clearRect(0,0,mask.width,mask.height);chips=[];dirty=true}
       }else{man.x+=dx/d*spd*dt;man.y+=dy/d*spd*dt}
     }
   }
@@ -628,11 +653,11 @@ document.documentElement.classList.add('js');
     var r=hero.getBoundingClientRect(),q=toImg(e.clientX-r.left,e.clientY-r.top),now=performance.now();
     if(!inFloor(q[0],q[1])){lastPt=null;return}
     var br=brush();
-    if(lastPt&&now-lastPt[2]<120)line(lastPt,q,br*2);else dab(q[0],q[1],br*2,false);
+    if(lastPt&&now-lastPt[2]<120)tearLine(lastPt,q,br*2);else tear(q[0],q[1],br*2);
     var last=pending[pending.length-1];if(!last||Math.hypot(last[0]-q[0],last[1]-q[1])>br*.6)pending.push([q[0],q[1]]);
     lastPt=[q[0],q[1],now];lastRub=now;
     if(!hinted){hinted=true;hint.classList.add('gone')}
-    if(reduce){clearTimeout(hero._t);hero._t=setTimeout(function(){pending.forEach(function(p){dab(p[0],p[1],br*2.6,true)});pending=[];paint()},900);paint()}
+    if(reduce){clearTimeout(hero._t);hero._t=setTimeout(function(){pending.forEach(function(p){dab(p[0],p[1],br*2.6)});pending=[];chips=[];paint()},900);paint()}
   });
   hero.addEventListener('pointerleave',function(){lastPt=null});
 
